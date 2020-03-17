@@ -1,0 +1,6 @@
+0 wzrost < 190.0 1 2 % korz
+1 wzrost > 130.0 2 koszykówka %razdwatrzy
+
+2 wyskok > 60.0 lekkoatletyka 3
+
+3 wyskok > 50.0 lekkoatletyka koszykówka %123123123%

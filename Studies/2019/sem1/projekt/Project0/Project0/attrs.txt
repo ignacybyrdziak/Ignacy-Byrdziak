@@ -1,0 +1,5 @@
+wzrost wyskok rzut % trzy atrybuty
+195.9 40.8 20.3 %kosz
+140.0 70.0 10.5 %lekka
+180.0 51.6 12.3 %lekka
+176.2 55.0 9.9 %lekka

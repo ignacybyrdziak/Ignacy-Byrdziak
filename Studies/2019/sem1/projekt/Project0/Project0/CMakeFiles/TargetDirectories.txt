@@ -1,0 +1,3 @@
+/home/wk/c/ignacy_projekt/CMakeFiles/rebuild_cache.dir
+/home/wk/c/ignacy_projekt/CMakeFiles/DecisionTree.dir
+/home/wk/c/ignacy_projekt/CMakeFiles/edit_cache.dir

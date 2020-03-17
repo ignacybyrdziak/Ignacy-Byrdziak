@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/wk/c/ignacy_projekt/src/functions.cpp
+iostream
+-
+string
+-
+sstream
+-
+fstream
+-
+functions.h
+/home/wk/c/ignacy_projekt/src/functions.h
+
+/home/wk/c/ignacy_projekt/src/functions.h
+iostream
+-
+string
+-
+sstream
+-
+structures.h
+/home/wk/c/ignacy_projekt/src/structures.h
+
+/home/wk/c/ignacy_projekt/src/structures.h
+iostream
+-
+string
+-
+sstream
+-
+
