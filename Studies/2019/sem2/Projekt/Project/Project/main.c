@@ -6,7 +6,7 @@
 #include "moves_definitions.h"
 #include "programm_operating_definitions.h"
 #include "structures_definitions.h"
-
+ 
 int main(void)
 {
 	int interfaceOption;
