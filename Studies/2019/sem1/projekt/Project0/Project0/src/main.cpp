@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-
+ 
 #include "functions.h"
 #include "structures.h"
 
