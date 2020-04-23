@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 #include "functions.h"
-
+ 
 int main() {
 	char PESEL[12];
 	bool End = false;
