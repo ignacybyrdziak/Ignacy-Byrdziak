@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 #include "functions_and_structures.h"
-
+ 
 int main()
 {
 	initial_data data;

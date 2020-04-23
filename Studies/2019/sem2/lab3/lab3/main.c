@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 #include "functions_and_structures.h"
-
+ 
 int main()
 {
 	Bitmap_File File_head;
