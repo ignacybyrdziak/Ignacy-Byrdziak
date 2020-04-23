@@ -1,6 +1,6 @@
 #pragma once
 #define debug(x)  std::cerr << "(" << __LINE__ << ") " << #x << " == " << (x) << std::endl
-
+ 
 // biblioteki standardowe
 #include <iostream>
 #include <vector> 

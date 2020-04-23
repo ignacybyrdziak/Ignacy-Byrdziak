@@ -1,1 +1,0 @@
-//Powtórka ze wskaŸników

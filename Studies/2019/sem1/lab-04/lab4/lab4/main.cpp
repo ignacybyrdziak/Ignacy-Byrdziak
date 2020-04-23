@@ -3,7 +3,7 @@
 #include <random>
 #include <chrono>
 using namespace std;
-
+ 
 int main() {
 	/*	
 	const int N=10;

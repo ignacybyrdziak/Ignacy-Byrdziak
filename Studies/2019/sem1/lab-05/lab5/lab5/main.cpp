@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <utility>
 #include <algorithm>
-
+ 
 using namespace std;
 
 void zamiana(int & x, int & y) {

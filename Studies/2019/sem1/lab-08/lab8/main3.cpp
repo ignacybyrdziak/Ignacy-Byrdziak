@@ -1,1 +1,0 @@
-//Powtórka z listy jednokierunkowej

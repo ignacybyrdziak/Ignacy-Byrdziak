@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
+ 
 using std::ifstream;
 struct Osoba
 {

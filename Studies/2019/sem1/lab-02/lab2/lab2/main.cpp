@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-
+ 
 double dzialanie(double a, char c, double b) {
 	switch (c) {
 	case '+': {

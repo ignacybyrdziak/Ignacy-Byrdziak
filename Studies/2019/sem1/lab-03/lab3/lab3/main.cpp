@@ -4,7 +4,7 @@
 #include <chrono>
 #include <vector>
 using namespace std;
-
+ 
 void kolejne(int n) {
 	for (int i = 1; i <= n; i++) {
 		cout << i << endl;
