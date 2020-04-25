@@ -23,9 +23,9 @@ for(i=0;i<15;i++)
 	nomin[i][1]=0;
 cout<<" Podaj CENE "<<endl;
 cin>>cena;
-cout<<" Podaj kaske "<<endl;
+cout<<" Podaj kwotê "<<endl;
 cin>>banknot;
-cout<<" ****Kasiurka**** "<<endl;
+cout<<" ****Kasa**** "<<endl;
 zapl=banknot-cena;
 while(zapl>0)
 	{if(zapl<nomin[i][0])

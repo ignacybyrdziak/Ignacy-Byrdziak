@@ -20,7 +20,4 @@ sito(t,l);
 for(k=2;k<=l;k++)
 	{if(t[k])
 		cout<<k<<endl;
-	if(k==997)
-		cout<<" Ten numer to klopoty !!!!! "<<endl;
-	}
 }
