@@ -2,7 +2,7 @@
 #include <string>
 #include <fstream>
 #include <cstdio>
-
+ 
 //12x20
 using namespace std;
 void wypisz(string tab[14][22]){

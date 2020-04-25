@@ -8,7 +8,7 @@ int main()
 	vector <int> stos;
 	int pom,a,b;
 	cout << "podaj dzialanie w ONP: ";
-	cin >> onp;
+	cin >> onp; 
 	for(int i=0;i<onp.length();i++) // przejezdzamy przez stringa
 	{
 		if(onp[i]>=48 and onp[i]<=57)
