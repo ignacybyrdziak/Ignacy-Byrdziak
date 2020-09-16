@@ -10,8 +10,12 @@
 
 #include "structures.h"
 
-Edge * Add_New_Distance(text city_1, text city_2, int dist, Edge *head);
+bool Finding_Duplicate_Distances(text city_1, text city_2, int dist, Vertex *head);
 
-Vertex * Add_New_City(text city_1, Vertex *head);
+bool Finding_Duplicate_Cities(text city_1, Edge *head);
+
+Vertex * Add_New_Distance(text city_1, text city_2, int dist, Vertex *head);
+
+Edge * Add_New_City(text city_1, Edge *head);
 
 #endif

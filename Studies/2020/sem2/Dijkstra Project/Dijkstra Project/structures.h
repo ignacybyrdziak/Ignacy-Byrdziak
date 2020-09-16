@@ -10,18 +10,18 @@
 
 typedef char* text;
 
-typedef struct edge
+typedef struct vertex
 {
 	text city1;
 	text city2;
 	int distance;
-	struct edge *next;
-} Edge;
-
-typedef struct vertex
-{
-	text city;
 	struct vertex *next;
 } Vertex;
+
+typedef struct edge
+{
+	text city;
+	struct edge *next;
+} Edge;
 
 #endif
