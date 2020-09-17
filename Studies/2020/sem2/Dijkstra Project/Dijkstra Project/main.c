@@ -90,7 +90,6 @@ int main(int argc, char **argv)
 	//   be reflected in arguments. */
 	//argp_parse(&argp, argc, argv, 0, 0, &arguments);
 
-	int i = 0;
 //	FILE *fp;
 //	char c;
 	int counter = 0, counter2 = 0;
@@ -98,24 +97,32 @@ int main(int argc, char **argv)
 	Vertex *list_of_distances=NULL;
 	Edge *list_of_cities=NULL;
 
-	char * cities[5] = { "Aaa", "Bielsko-Bia³a", "C", "D", "E" };
+	char * cities[5] = { "Aaa", "Aaa", "C", "D", "E" };
 	char * cities2[5] = { "Fff", "Ggg", "H", "I", "J" };
 	int dist[5] = { 2,4,6,8,10 };
-	for (i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		list_of_cities=Add_New_City(cities[i], list_of_cities);
-		printf("miasto to %s\n", list_of_cities->city);
-		counter++;
+		if (Finding_Duplicate_Cities(cities[i], list_of_cities))
+		{
+			list_of_cities = Add_New_City(cities[i], list_of_cities);
+			counter++;
+			Printing_City_On_Called_Position(counter-1, list_of_cities);
+		}
 	}
 
 	printf("\n");
-	for (i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		list_of_distances = Add_New_Distance(cities[i], cities2[i], dist[i], list_of_distances);
-		printf("%s %s %d\n", list_of_distances->city1, list_of_distances->city2, list_of_distances->distance);
-		counter2++;
+		if (Finding_Duplicate_Distances(cities[i], cities2[i], list_of_distances))
+		{
+			list_of_distances = Add_New_Distance(cities[i], cities2[i], dist[i], list_of_distances);
+			counter2++;
+			Printing_Distance_On_Called_Position(counter2 - 1, list_of_distances);
+		}
 	}
+	
 
+	printf("miasto 2 to %s", list_of_cities->city[0]);
 	//if (arguments.inputing == 1)
 	//{
 	//	char str[50];

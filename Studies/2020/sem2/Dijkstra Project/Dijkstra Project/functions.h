@@ -10,7 +10,11 @@
 
 #include "structures.h"
 
-bool Finding_Duplicate_Distances(text city_1, text city_2, int dist, Vertex *head);
+void Printing_City_On_Called_Position(int position, Edge *head);
+
+void Printing_Distance_On_Called_Position(int position, Vertex *head);
+
+bool Finding_Duplicate_Distances(text city_1, text city_2, Vertex *head);
 
 bool Finding_Duplicate_Cities(text city_1, Edge *head);
 
