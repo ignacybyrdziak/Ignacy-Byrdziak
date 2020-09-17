@@ -29,6 +29,93 @@ void Printing_Distance_On_Called_Position(int position, Vertex *head)
 	printf("%d. Distance: %s %s %d\n", position+1, current_node->city1, current_node->city2, current_node->distance);
 }
 
+Grafowa *Add_New_Element_To_Graf(Grafowa *head, slistEL *pw)
+{
+	if (head == NULL)
+	{
+		head = (Grafowa *)malloc(sizeof(Grafowa));
+		head = pw;
+		head->next = NULL;
+		return head;
+	}
+
+	Grafowa*current_node = head;
+
+	while (current_node->next != NULL)
+		current_node = current_node->next;
+
+	current_node->next = (Grafowa *)malloc(sizeof(Grafowa));
+	current_node->next = pw;
+	current_node->next->next = NULL;
+	return head;
+}
+
+Zbiory *Add_New_Element_To_Q(Zbiory *head)
+{
+	if (head == NULL)
+	{
+		head = (Zbiory *)malloc(sizeof(Zbiory));
+		head->p = false;
+		head->next = NULL;
+		return head;
+	}
+
+	Zbiory*current_node = head;
+
+	while (current_node->next != NULL)
+		current_node = current_node->next;
+
+	current_node->next = (Zbiory *)malloc(sizeof(Zbiory));
+	current_node->next->p = false;
+	current_node->next->next = NULL;
+	return head;
+}
+
+Zwykla *Add_New_Element_To_A_List(int val, Zwykla *head)
+{
+	if (head == NULL)
+	{
+		head = (Zwykla *)malloc(sizeof(Zwykla));
+		head->v = val;
+		head->next = NULL;
+		return head;
+	}
+
+	Zwykla*current_node = head;
+
+	while (current_node->next != NULL)
+		current_node = current_node->next;
+
+	current_node->next = (Edge *)malloc(sizeof(Edge));
+	current_node->next->v = val;
+	current_node->next->next = NULL;
+	return head;
+}
+
+Zbiory *Finding_Value_From_Zbior(int position, Zbiory *head)
+{
+	Zbiory *current_node = head;
+	int counter = 0;
+	while (counter != position)
+	{
+		current_node = current_node->next;
+		counter++;
+	}
+	return current_node->p;
+}
+
+void Assinging_Value_To_A_List(int val, int position, Zwykla *head)
+{
+	Zwykla *current_node = head;
+	int counter = 0;
+	while (counter != position)
+	{
+		current_node = current_node->next;
+		counter++;
+	}
+	current_node->v = val;
+}
+
 bool Finding_Duplicate_Distances(text city_1, text city_2, Vertex *head)
 {
 	if (head == NULL)

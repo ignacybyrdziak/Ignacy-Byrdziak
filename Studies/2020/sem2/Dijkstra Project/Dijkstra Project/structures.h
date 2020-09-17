@@ -10,6 +10,31 @@
 
 typedef char* text;
 
+typedef struct grafowa
+{
+	int v;          // numer wêz³a docelowego i waga krawêdzi
+	struct grafowa * next;
+	struct zwykla * dol;
+} Grafowa;
+
+typedef struct zbiory
+{
+	bool p;          // numer wêz³a docelowego i waga krawêdzi
+	struct zbiory * next;
+} Zbiory;
+
+typedef struct zwykla
+{
+	int v;          // numer wêz³a docelowego i waga krawêdzi
+	struct zwykla * next;
+} Zwykla;
+
+typedef struct slistEl
+{
+	int v, w;           // numer wêz³a docelowego i waga krawêdzi
+	struct slistEl * next;
+} slistEL;
+
 typedef struct vertex
 {
 	text city1;
