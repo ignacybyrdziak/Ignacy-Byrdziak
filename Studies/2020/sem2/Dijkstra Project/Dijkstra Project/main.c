@@ -122,7 +122,6 @@ int main(int argc, char **argv)
 	}
 	
 
-	printf("miasto 2 to %s", list_of_cities->city[0]);
 	//if (arguments.inputing == 1)
 	//{
 	//	char str[50];
