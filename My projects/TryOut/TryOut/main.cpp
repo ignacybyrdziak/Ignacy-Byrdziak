@@ -83,6 +83,8 @@ int main()
 				p[pw->v] = u;
 			}
 	}
+	for (int i = 0; i < 6; i++)
+		cout << d[i] << endl;
 
 	// Gotowe, wyœwietlamy wyniki
 

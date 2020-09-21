@@ -10,15 +10,25 @@
 
 #include "structures.h"
 
-Zbiory *Finding_Value_From_Zbior(int position, Zbiory *head);
+Zbiory * Assinging_Value_To_A_Zbior(bool p, int position, Zbiory*head);
 
-Grafowa *Add_New_Element_To_Graf(Grafowa *head, slistEL *pw);
+slistEL * Assinging_Value_To_A_Graf(slistEL *pw, int position, slistEL *head);
+
+bool * Is_There_A_Node(int position, slistEL *head);
+
+int Finding_Value_From_A_List(int position, Zwykla *head);
+
+bool Finding_Value_From_Zbior(int position, Zbiory *head);
+
+slistEL *Finding_Value_From_A_Graf(int position, slistEL *head);
+
+slistEL *Add_New_Element_To_Graf(slistEL *head, slistEL *pw);
 
 Zbiory *Add_New_Element_To_Q(Zbiory *head);
 
 Zwykla *Add_New_Element_To_A_List(int val, Zwykla *head);
 
-void Assinging_Value_To_A_List(int val, int position, Zwykla *head);
+Zwykla *Assinging_Value_To_A_List(int val, int position, Zwykla *head);
 
 void Printing_City_On_Called_Position(int position, Edge *head);
 

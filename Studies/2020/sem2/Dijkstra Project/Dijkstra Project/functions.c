@@ -5,6 +5,76 @@
 
 #include "functions.h"
 
+slistEL * Assinging_Value_To_A_Graf(slistEL *pw, int position, slistEL *head)
+{
+	slistEL *current_node = head;
+	int counter = 0;
+	while (counter != position)
+	{
+		current_node = current_node->next;
+		counter++;
+	}
+	current_node = pw;
+	return head;
+}
+
+Zbiory * Assinging_Value_To_A_Zbior(bool b, int position, Zbiory*head)
+{
+	Zbiory *current_node = head;
+	int counter = 0;
+	while (counter != position)
+	{
+		current_node = current_node->next;
+		counter++;
+	}
+	current_node->p = b;
+	return head;
+}
+
+bool * Is_There_A_Node(int position, slistEL *head)
+{
+	if (head == NULL)
+		return false;
+	slistEL *current_node = head;
+	int counter = 0;
+	while (counter != position)
+	{
+		current_node = current_node->next;
+		if (current_node == NULL)
+			return false;
+		counter++;
+	}
+	return true;
+}
+
+int Finding_Value_From_A_List(int position, Zwykla *head)
+{
+	Zwykla *current_node = head;
+	int counter = 0;
+	while (counter != position)
+	{
+		current_node = current_node->next;
+		counter++;
+	}
+	return current_node->v;
+}
+
+slistEL *Finding_Value_From_A_Graf(int position, slistEL *head)
+{
+	if (head == false)
+		return NULL;
+	slistEL *current_node = head;
+	int counter = 0;
+	while (counter != position)
+	{
+		current_node = current_node->next;
+		if (current_node == NULL)
+			return NULL;
+		counter++;
+	}
+	return current_node;
+}
+
 void Printing_City_On_Called_Position(int position, Edge *head)
 {
 	Edge *current_node = head;
@@ -29,22 +99,22 @@ void Printing_Distance_On_Called_Position(int position, Vertex *head)
 	printf("%d. Distance: %s %s %d\n", position+1, current_node->city1, current_node->city2, current_node->distance);
 }
 
-Grafowa *Add_New_Element_To_Graf(Grafowa *head, slistEL *pw)
+slistEL *Add_New_Element_To_Graf(slistEL *head, slistEL *pw)
 {
 	if (head == NULL)
 	{
-		head = (Grafowa *)malloc(sizeof(Grafowa));
+		head = (slistEL *)malloc(sizeof(slistEL));
 		head = pw;
 		head->next = NULL;
 		return head;
 	}
 
-	Grafowa*current_node = head;
+	slistEL*current_node = head;
 
 	while (current_node->next != NULL)
 		current_node = current_node->next;
 
-	current_node->next = (Grafowa *)malloc(sizeof(Grafowa));
+	current_node->next = (slistEL *)malloc(sizeof(slistEL));
 	current_node->next = pw;
 	current_node->next->next = NULL;
 	return head;
@@ -86,13 +156,13 @@ Zwykla *Add_New_Element_To_A_List(int val, Zwykla *head)
 	while (current_node->next != NULL)
 		current_node = current_node->next;
 
-	current_node->next = (Edge *)malloc(sizeof(Edge));
+	current_node->next = (Zwykla *)malloc(sizeof(Zwykla));
 	current_node->next->v = val;
 	current_node->next->next = NULL;
 	return head;
 }
 
-Zbiory *Finding_Value_From_Zbior(int position, Zbiory *head)
+bool Finding_Value_From_Zbior(int position, Zbiory *head)
 {
 	Zbiory *current_node = head;
 	int counter = 0;
@@ -104,7 +174,7 @@ Zbiory *Finding_Value_From_Zbior(int position, Zbiory *head)
 	return current_node->p;
 }
 
-void Assinging_Value_To_A_List(int val, int position, Zwykla *head)
+Zwykla *Assinging_Value_To_A_List(int val, int position, Zwykla *head)
 {
 	Zwykla *current_node = head;
 	int counter = 0;
@@ -114,6 +184,7 @@ void Assinging_Value_To_A_List(int val, int position, Zwykla *head)
 		counter++;
 	}
 	current_node->v = val;
+	return head;
 }
 
 bool Finding_Duplicate_Distances(text city_1, text city_2, Vertex *head)

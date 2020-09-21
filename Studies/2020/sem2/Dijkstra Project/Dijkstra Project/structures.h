@@ -10,12 +10,12 @@
 
 typedef char* text;
 
-typedef struct grafowa
-{
-	int v;          // numer wêz³a docelowego i waga krawêdzi
-	struct grafowa * next;
-	struct zwykla * dol;
-} Grafowa;
+//typedef struct grafowa
+//{
+//	int v;          // numer wêz³a docelowego i waga krawêdzi
+//	struct grafowa * next;
+//	//struct zwykla * dol;
+//} Grafowa;
 
 typedef struct zbiory
 {

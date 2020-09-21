@@ -132,46 +132,61 @@
 
 	int main()
 	{
-		int i, j, m, CNT, v, u, w, x, y, sptr, *d, *p, *S;
+		int i, j, CNT, m, v, u, w, x, y, sptr;
 		//bool *QS;           // Zbiory Q i S
-		slistEL **graf;     // Tablica list s¹siedztwa
-		slistEL *pw, *rw;
+		//slistEL **graf;     // Tablica list s¹siedztwa
+		slistEL *pw; //*rw;
 
-		scanf("%d %d %d", v, CNT, w);		// Wêze³ startowy, liczba wierzcho³ków i krawêdzi
+		scanf_s("%d %d %d", &v, &CNT, &m);		// Wêze³ startowy, liczba wierzcho³ków i krawêdzi
 
 		// Tworzymy tablice dynamiczne
 
 		Zwykla *dojscia = NULL;          // Tablica kosztów dojœcia
 		Zwykla *poprzednie = NULL;          // Tablica poprzedników
+		Zwykla *Stos = NULL;
 		Zbiory *QS = NULL;			// Zbiory Q i S
-		Grafowa *graf = NULL; // Tablica list s¹siedztwa
-		Zwykla *Stos = NULL;          // Stos
+		slistEL *graf = NULL; // Tablica list s¹siedztwa
+		//Zwykla *Stos = NULL;          // Stos
 		sptr = 0;                   // WskaŸnik stosu
 
 		// Inicjujemy tablice dynamiczne
 
 		for (i = 0; i < CNT; i++)
 		{
-			Add_New_Element_To_A_List(MAXINT, dojscia);
-			Add_New_Element_To_A_List(-1, poprzednie);
-			Add_New_Element_To_Q(QS);
+			dojscia = Add_New_Element_To_A_List(MAXINT, dojscia);
+			poprzednie = Add_New_Element_To_A_List(-1, poprzednie);
+			QS = Add_New_Element_To_Q(QS);
 		}
 
 		// Odczytujemy dane wejœciowe
 
+
+		//for (i = 0; i < m; i++)
+		//{
+		//	cin >> x >> y >> w;    // Odczytujemy krawêdŸ z wag¹
+		//	pw = new slistEl;      // Tworzymy element listy s¹siedztwa
+		//	pw->v = y;             // Wierzcho³ek docelowy krawêdzi
+		//	pw->w = w;             // Waga krawêdzi
+		//	pw->next = graf[x];
+		//	graf[x] = pw;       // Element do³¹czamy do listy
+		//}
+
 		for (i = 0; i < m; i++)
 		{
-			scanf("%d %d %d", x, y, w);    // Odczytujemy krawêdŸ z wag¹
+			scanf_s("%d %d %d", &x, &y, &w);    // Odczytujemy krawêdŸ z wag¹
 			pw = (slistEL *)malloc(sizeof(slistEL));    // Tworzymy element listy s¹siedztwa
 			pw->v = y;             // Wierzcho³ek docelowy krawêdzi
 			pw->w = w;             // Waga krawêdzi
-			pw->next = NULL;
-			Add_New_Element_To_Graf(graf, pw); // Element do³¹czamy do listy
+			pw->next = Finding_Value_From_A_Graf(x, graf);
+			if (Is_There_A_Node(x, graf))
+				graf = Assinging_Value_To_A_Graf(pw, x, graf);
+			else
+				graf = Add_New_Element_To_Graf(graf, pw); // Element do³¹czamy do listy
 		}
 
 		printf("\n");
 
-		Assinging_Value_To_A_List(0, v, dojscia);            // Koszt dojœcia v jest zerowy
+		dojscia = Assinging_Value_To_A_List(0, v, dojscia);            // Koszt dojœcia v jest zerowy
 
 		// Wyznaczamy œcie¿ki
 
@@ -181,19 +196,20 @@
 
 			for (j = 0; Finding_Value_From_Zbior(j, QS); j++);
 			for (u = j++; j < CNT; j++)
-				if (!Finding_Value_From_Zbior(j, QS) && ////////////////////////(d[j] < d[u])) u = j;
+				if (!Finding_Value_From_Zbior(j, QS) && (Finding_Value_From_A_List(j, dojscia) < Finding_Value_From_A_List(u, dojscia)))
+					u = j;
 
 			// Znaleziony wierzcho³ek przenosimy do S
 
-			QS[u] = true;
+			QS = Assinging_Value_To_A_Zbior(true, u, QS);
 
 			// Modyfikujemy odpowiednio wszystkich s¹siadów u, którzy s¹ w Q
 
-			for (pw = graf[u]; pw; pw = pw->next)
-				if (!QS[pw->v] && (d[pw->v] > d[u] + pw->w))
+			for (pw = Finding_Value_From_A_Graf(u, graf); pw; pw = pw->next)
+				if (!(Finding_Value_From_Zbior(pw->v, QS)) && (Finding_Value_From_A_List (pw->v, dojscia) > (Finding_Value_From_A_List(u, dojscia) + pw->w)))
 				{
-					d[pw->v] = d[u] + pw->w;
-					p[pw->v] = u;
+					dojscia = Assinging_Value_To_A_List((Finding_Value_From_A_List(u, dojscia) + pw->w), pw->v, dojscia);
+					poprzednie = Assinging_Value_To_A_List(u, pw->v, poprzednie);
 				}
 		}
 
@@ -201,20 +217,28 @@
 
 		for (i = 0; i < CNT; i++)
 		{
-			printf("%d\n", i);
+			printf("%d: ", i);
 
 			// Œcie¿kê przechodzimy od koñca ku pocz¹tkowi, 
 			// Zapisuj¹c na stosie kolejne wierzcho³ki
 
-			for (j = i; j > -1; j = p[j]) S[sptr++] = j;
-
+			for (j = i; j > -1; j = Finding_Value_From_A_List(j, poprzednie))
+			{
+				sptr++;
+				Stos = Add_New_Element_To_A_List(j, Stos);
+			}
+				
 			// Wyœwietlamy œcie¿kê, pobieraj¹c wierzcho³ki ze stosu
 
-			while (sptr) cout << S[--sptr] << " ";
-
+			while (sptr)
+			{
+				--sptr;
+				printf("%d ", Finding_Value_From_A_List(sptr, Stos));
+			}
+				
 			// Na koñcu œcie¿ki wypisujemy jej koszt
 
-			printf("$ %d", d[i]); 
+			printf("$ %d\n", Finding_Value_From_A_List(i, dojscia));
 		}
 
 		// Usuwamy tablice dynamiczne
