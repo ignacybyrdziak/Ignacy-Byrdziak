@@ -10,36 +10,72 @@
 
 #include "structures.h"
 
-Zbiory * Assinging_Value_To_A_Zbior(bool p, int position, Zbiory*head);
+//Zbiory * Assinging_Value_To_A_Zbior(bool p, int position, Zbiory*head);
+//
+//slistEL * Assinging_Value_To_A_Graf(slistEL *pw, int position, slistEL *head);
+//
+//bool * Is_There_A_Node(int position, slistEL *head);
+//
+int Finding_City_From_A_List(text city_to_find, Vertex *head);
+//
+//bool Finding_Value_From_Zbior(int position, Zbiory *head);
+//
+//slistEL *Finding_Value_From_A_Graf(int position, slistEL *head);
+//
+//slistEL *Add_New_Element_To_Graf(slistEL *head, slistEL *pw);
+//
+//Zbiory *Add_New_Element_To_Q(Zbiory *head);
+//
+//Zwykla *Add_New_Element_To_A_List(int val, Zwykla *head);
+//
+//Zwykla *Assinging_Value_To_A_List(int val, int position, Zwykla *head);
+//
+void Printing_City_On_Called_Position(int position, Vertex *head);
 
-slistEL * Assinging_Value_To_A_Graf(slistEL *pw, int position, slistEL *head);
+void Printing_Distance_On_Called_Position(int position, Edge *head);
 
-bool * Is_There_A_Node(int position, slistEL *head);
+struct AdjListNode* newAdjListNode(int dest, int weight);
 
-int Finding_Value_From_A_List(int position, Zwykla *head);
+struct Graph* createGraph(int V);
 
-bool Finding_Value_From_Zbior(int position, Zbiory *head);
+void addEdge(struct Graph* graph, int src, int dest, int weight);
 
-slistEL *Finding_Value_From_A_Graf(int position, slistEL *head);
+void minHeapify(struct MinHeap* minHeap, int idx);
 
-slistEL *Add_New_Element_To_Graf(slistEL *head, slistEL *pw);
+int isEmpty(struct MinHeap* minHeap);
 
-Zbiory *Add_New_Element_To_Q(Zbiory *head);
+struct MinHeapNode* extractMin(struct MinHeap* minHeap);
 
-Zwykla *Add_New_Element_To_A_List(int val, Zwykla *head);
+void decreaseKey(struct MinHeap* minHeap, int v, int dist);
 
-Zwykla *Assinging_Value_To_A_List(int val, int position, Zwykla *head);
+bool isInMinHeap(struct MinHeap *minHeap, int v);
 
-void Printing_City_On_Called_Position(int position, Edge *head);
+void printArr(int dist[], int n);
 
-void Printing_Distance_On_Called_Position(int position, Vertex *head);
+void dijkstra(struct Graph* graph, int src);
 
-bool Finding_Duplicate_Distances(text city_1, text city_2, Vertex *head);
+struct MinHeapNode* newMinHeapNode(int v, int dist);
 
-bool Finding_Duplicate_Cities(text city_1, Edge *head);
+void swapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b);
 
-Vertex * Add_New_Distance(text city_1, text city_2, int dist, Vertex *head);
+bool Finding_Duplicate_Distances(text city_1, text city_2, Edge *head);
 
-Edge * Add_New_City(text city_1, Edge *head);
+bool Finding_Duplicate_Cities(text city_1, Vertex *head);
+
+Edge * Add_New_Distance(text city_1, text city_2, int dist, Edge *head);
+
+Vertex* Add_New_City(text city_1, int counter, Vertex *head);
+
+void Delete_AdjListNode(struct AdjListNode** pHead);
+
+void Delete_AdjList(struct AdjList** pHead);
+
+void Delete_Graph(struct Graph** pHead);
+
+void Delete_MinHeap(struct MinHeap** pHead);
+
+void Delete_Edge(Edge** pHead);
+
+void Delete_Vertex(Vertex** pHead);
 
 #endif

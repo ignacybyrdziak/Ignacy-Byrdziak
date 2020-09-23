@@ -10,43 +10,57 @@
 
 typedef char* text;
 
-//typedef struct grafowa
-//{
-//	int v;          // numer wêz³a docelowego i waga krawêdzi
-//	struct grafowa * next;
-//	//struct zwykla * dol;
-//} Grafowa;
-
-typedef struct zbiory
+// A structure to represent a node in adjacency list 
+struct AdjListNode
 {
-	bool p;          // numer wêz³a docelowego i waga krawêdzi
-	struct zbiory * next;
-} Zbiory;
+	int dest;
+	int weight;
+	struct AdjListNode* next;
+};
 
-typedef struct zwykla
+// A structure to represent an adjacency list 
+struct AdjList
 {
-	int v;          // numer wêz³a docelowego i waga krawêdzi
-	struct zwykla * next;
-} Zwykla;
+	struct AdjListNode *head;  // pointer to head node of list 
+};
 
-typedef struct slistEl
+// A structure to represent a graph. A graph is an array of adjacency lists. 
+// Size of array will be V (number of vertices in graph) 
+struct Graph
 {
-	int v, w;           // numer wêz³a docelowego i waga krawêdzi
-	struct slistEl * next;
-} slistEL;
+	int V;
+	struct AdjList* array;
+};
 
-typedef struct vertex
+// Structure to represent a min heap node 
+struct MinHeapNode
+{
+	int  v;
+	int dist;
+};
+
+// Structure to represent a min heap 
+struct MinHeap
+{
+	int size;      // Number of heap nodes present currently 
+	int capacity;  // Capacity of min heap 
+	int *pos;     // This is needed for decreaseKey() 
+	struct MinHeapNode **array;
+};
+
+typedef struct edge
 {
 	text city1;
 	text city2;
 	int distance;
-	struct vertex *next;
-} Vertex;
-
-typedef struct edge
-{
-	text city;
 	struct edge *next;
 } Edge;
+
+typedef struct vertex
+{
+	int counter;
+	text city;
+	struct vertex *next;
+} Vertex;
 
 #endif
