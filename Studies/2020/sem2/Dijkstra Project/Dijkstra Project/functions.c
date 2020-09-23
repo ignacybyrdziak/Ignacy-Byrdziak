@@ -60,10 +60,10 @@ struct MinHeap* createMinHeap(int capacity)
 //	return true;
 //}
 //
-int Finding_City_From_A_List(text city_to_find, Vertex *head)
+int Finding_City_Position_From_A_List(text city_to_find, Vertex *head)
 {
 	Vertex *current_node = head;
-	while (current_node->city != city_to_find)
+	while (strcmp(current_node->city , city_to_find) != 0)
 		current_node = current_node->next;
 	return current_node->counter;
 }
@@ -517,8 +517,8 @@ bool Finding_Duplicate_Distances(text city_1, text city_2, Edge *head)
 
 	while (current_node != NULL)
 	{
-		if (current_node->city1 == city_1 || current_node->city2 == city_1)
-			if (current_node->city1 == city_2 || current_node->city2 == city_2)
+		if ((strcmp(current_node->city1, city_1) == 0) || (strcmp(current_node->city2, city_2) == 0))
+			if ((strcmp(current_node->city1, city_2) == 0) || (strcmp(current_node->city2, city_1) == 0))
 				return false;
 		current_node = current_node->next;
 	}
@@ -534,7 +534,7 @@ bool Finding_Duplicate_Cities(text city_1, Vertex *head)
 
 	while (current_node != NULL)
 	{
-		if (current_node->city == city_1)
+		if ((strcmp(current_node->city, city_1) == 0))
 			return false;
 		current_node = current_node->next;
 	}
@@ -546,8 +546,10 @@ Edge * Add_New_Distance(text city_1, text city_2, int dist, Edge *head)
 	if (head == NULL)
 	{
 		head = (Edge *)malloc(sizeof(Edge));
-		head->city1 = city_1;
-		head->city2 = city_2;
+		head->city1 = (text)malloc(sizeof(text));
+		head->city2 = (text)malloc(sizeof(text));
+		strcpy(head->city1, city_1);
+		strcpy(head->city2, city_2);
 		head->distance = dist;
 		head->next = NULL;
 		return head;
@@ -559,8 +561,10 @@ Edge * Add_New_Distance(text city_1, text city_2, int dist, Edge *head)
 		current_node = current_node->next;
 
 	current_node->next = (Edge *)malloc(sizeof(Edge));
-	current_node->next->city1 = city_1;
-	current_node->next->city2 = city_2;
+	current_node->next->city1 = (text)malloc(sizeof(text));
+	current_node->next->city2 = (text)malloc(sizeof(text));
+	strcpy(current_node->next->city1, city_1);	
+	strcpy(current_node->next->city2, city_2);
 	current_node->next->distance = dist;
 	current_node->next->next = NULL;
 	return head;
@@ -571,7 +575,8 @@ Vertex* Add_New_City(text city_1, int c, Vertex *head)
 	if (head == NULL)
 	{
 		head = (Vertex *)malloc(sizeof(Vertex));
-		head->city = city_1;
+		head->city = (text)malloc(sizeof(text));
+		strcpy(head->city, city_1);
 		head->counter = c;
 		head->next = NULL;
 		return head;
@@ -583,7 +588,8 @@ Vertex* Add_New_City(text city_1, int c, Vertex *head)
 		current_node = current_node->next;
 
 	current_node->next = (Vertex *)malloc(sizeof(Vertex));
-	current_node->next->city = city_1;
+	current_node->next->city = (text)malloc(sizeof(text));
+	strcpy(current_node->next->city, city_1);
 	current_node->next->counter = c;
 	current_node->next->next = NULL;
 	return head;

@@ -16,7 +16,7 @@
 //
 //bool * Is_There_A_Node(int position, slistEL *head);
 //
-int Finding_City_From_A_List(text city_to_find, Vertex *head);
+int Finding_City_Position_From_A_List(text city_to_find, Vertex *head);
 //
 //bool Finding_Value_From_Zbior(int position, Zbiory *head);
 //

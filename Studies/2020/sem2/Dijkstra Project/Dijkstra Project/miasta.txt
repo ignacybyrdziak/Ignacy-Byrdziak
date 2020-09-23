@@ -1,0 +1,14 @@
+Andrychow Bielsko 4
+Andrychow Halcnow 8
+Bielsko Cieszyn 8
+Bielsko Halcnow 11
+Cieszyn Dobczyce 7
+Cieszyn Ilownica 2
+Cieszyn Frankfurt 4
+Dobczyce Elk 9
+Dobczyce Frankfurt 14
+Elk Frankfurt 10
+Frankfurt Gniezno 2
+Gniezno Halcnow 1
+Gniezno Ilownica 6
+Halcnow Ilownica 7

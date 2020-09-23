@@ -3,6 +3,7 @@
 #include <math.h>
 #include <limits.h> 
 #include <cstdbool>
+#include <string.h>
 
 #include "functions.h"
 
@@ -13,57 +14,88 @@ int main(int argc, char *argv[])
 	printf("\n");
 
 	text input_file, output_file;
-	int cities_position = 0, distance_position = 0, mod_counter = 1;
+	int cities_position = 0, distance_position = 0, mod_counter = 1, character_counter = 0, space_counter;
 	Edge *list_of_distances = NULL;
 	Vertex *list_of_cities = NULL;
 	FILE * pFile, *fp;
-	errno_t err;
+	char buf[1024], c[10];
+	Edge* tmp = (Edge *)malloc(sizeof(Edge));
+
+	for (int n = 0; n < 10; n++)
+	{
+		c[n] = NULL;
+	}
 
 	for (int i = 1; i < argc; i++)
 	{
 		if (strcmp(argv[i], "-i") == 0)
 		{
-			Edge* tmp = (Edge *)malloc(sizeof(Edge));
 			input_file = argv[i+1];
 			fp = fopen_s(&pFile, input_file, "r");
-			if (fp==NULL)
+			if (pFile==NULL)
 			{
-				fclose(fp);
+				fclose(pFile);
 				printf("File empty");
 			}
 			else
 			{
-				char buf[1000];
-
-				while (scanf_s(fp, "%s", buf) != EOF)
+				while (fgets(buf,1024,pFile) >= 1024)//nieskoczonosc
 				{
-					if (mod_counter % 3 == 1)
+					mod_counter = 1;
+					space_counter = 0;
+					for (int m = 0; m < 1024; m++)
 					{
-						if (Finding_Duplicate_Cities(buf, list_of_cities))
+						if (buf[m] == ' ' || buf[m] == '\n' || buf[m] == '\t')
 						{
-							list_of_cities = Add_New_City(buf, cities_position, list_of_cities);
-							Printing_City_On_Called_Position(cities_position, list_of_cities);
-							cities_position++;
+							if (mod_counter % 3 == 0)
+							{
+								if (Finding_Duplicate_Distances(tmp->city1, tmp->city2, list_of_distances))
+								{
+									list_of_distances = Add_New_Distance(tmp->city1, tmp->city2, atoi(c), list_of_distances);
+									Printing_Distance_On_Called_Position(distance_position, list_of_distances);
+									distance_position++;
+								}
+							}
+							character_counter = 0;
+							space_counter++;
+							if (space_counter == 3)
+							{
+								break;
+							}
+
+							if (mod_counter % 3 == 1)
+							{
+								if (Finding_Duplicate_Cities(c, list_of_cities))
+								{
+									list_of_cities = Add_New_City(c, cities_position, list_of_cities);
+									Printing_City_On_Called_Position(cities_position, list_of_cities);
+									cities_position++;
+								}
+								tmp->city1 = (text)malloc(sizeof(text));
+								strcpy_s(tmp->city1, 10, c);
+							}
+							if (mod_counter % 3 == 2)
+							{
+								if (Finding_Duplicate_Cities(c, list_of_cities))
+								{
+									list_of_cities = Add_New_City(c, cities_position, list_of_cities);
+									Printing_City_On_Called_Position(cities_position, list_of_cities);
+									cities_position++;
+								}
+								tmp->city2 = (text)malloc(sizeof(text));
+								strcpy_s(tmp->city2, 10, c);
+							}
+							mod_counter++;
+
+							for (int n = 0; n < 10; n++)
+							{
+								c[n] = NULL;
+							}
 						}
-						tmp->city1 == buf;
-					}
-					if (mod_counter % 3 == 2)
-					{
-						if (Finding_Duplicate_Cities(buf, list_of_cities))
+						else
 						{
-							list_of_cities = Add_New_City(buf, cities_position, list_of_cities);
-							Printing_City_On_Called_Position(cities_position, list_of_cities);
-							cities_position++;
-						}
-						tmp->city2 == buf;
-					}
-					if (mod_counter % 3 == 0)
-					{
-						if (Finding_Duplicate_Distances(tmp->city1, tmp->city2, list_of_distances))
-						{
-							list_of_distances = Add_New_Distance(tmp->city1, tmp->city2, buf, list_of_distances);
-							Printing_Distance_On_Called_Position(distance_position, list_of_distances);
-							distance_position++;
+							c[character_counter] = buf[m];
+							character_counter++;
 						}
 					}
 				}
@@ -72,17 +104,21 @@ int main(int argc, char *argv[])
 		}
 		else if (strcmp(argv[i], "-o") == 0)
 		{
-			output_file = argv[i+1];
-			err = fopen_s(&pFile, output_file, "w");
+			//output_file = argv[i+1];
+			//fp = fopen_s(&pFile, input_file, "w");
 
 			struct Graph* graph = createGraph(cities_position);
 			while (list_of_distances)
-				addEdge(graph, list_of_distances->city1, list_of_distances->city1, list_of_distances->distance);
+			{
+				addEdge(graph, Finding_City_Position_From_A_List(list_of_distances->city1, list_of_cities), Finding_City_Position_From_A_List(list_of_distances->city2, list_of_cities), list_of_distances->distance);
+				list_of_distances = list_of_distances->next;
+			}
+				
 
 			dijkstra(graph, 0);
 
-			Delete_Vertex(list_of_cities);
-			Delete_Edge(list_of_distances);
+			//Delete_Vertex(list_of_cities);
+			//Delete_Edge(list_of_distances);
 			free(graph);
 
 			i++;
@@ -95,8 +131,8 @@ int main(int argc, char *argv[])
 			
 			dijkstra(graph, 0);
 			
-			Delete_Vertex(list_of_cities);
-			Delete_Edge(list_of_distances);
+			//Delete_Vertex(list_of_cities);
+			//Delete_Edge(list_of_distances);
 			free(graph);
 
 		}
@@ -132,7 +168,11 @@ int main(int argc, char *argv[])
 		free(list_of_distances);
 
 	return 0;
+
 }
+
+
+
 
 		// Usuwamy tablice dynamiczne
 
