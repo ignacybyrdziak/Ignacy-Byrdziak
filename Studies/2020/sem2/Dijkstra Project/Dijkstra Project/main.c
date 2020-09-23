@@ -28,14 +28,14 @@ int main(int argc, char *argv[])
 			fp = fopen_s(&pFile, input_file, "r");
 			if (fp==NULL)
 			{
-				fclose(pFile);
+				fclose(fp);
 				printf("File empty");
 			}
 			else
 			{
-				char buf[1023];
+				char buf[1000];
 
-				while (fscanf_s(fp, "%s", buf) != EOF)
+				while (scanf_s(fp, "%s", buf) != EOF)
 				{
 					if (mod_counter % 3 == 1)
 					{
