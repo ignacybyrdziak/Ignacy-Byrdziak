@@ -54,7 +54,7 @@ typedef struct edge
 	text city2;
 	int distance;
 	struct edge *next;
-} Edge;
+} Edge; 
 
 typedef struct vertex
 {

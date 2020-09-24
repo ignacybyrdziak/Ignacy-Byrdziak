@@ -226,11 +226,9 @@ void Delete_AdjList(struct AdjList* pHead)
 
 void Delete_Graph(struct Graph* pHead)
 {
-	struct Graph* tmp = NULL;
 	while (pHead)
 	{
-		tmp = (pHead)->array;
-		free((pHead)->V);
+		struct Graph *tmp = (pHead)->array;
 		free(pHead);
 		pHead = tmp;
 	}
@@ -250,28 +248,36 @@ void Delete_MinHeap(struct MinHeap** pHead)
 	}
 }
 
-void Delete_Edge(Edge* pHead)
+void Delete_Distance(Edge* pHead)
 {
-	Edge* tmp = NULL;
 	while (pHead)
 	{
-		tmp = (pHead)->next;
+		Edge *tmp = (pHead)->next;
 		free((pHead)->city1);
 		free((pHead)->city2);
-		free((pHead)->distance);
 		free(pHead);
 		pHead = tmp;
 	}
 }
 
-void Delete_Vertex(Vertex* pHead)
+void Delete_City(Vertex* pHead)
 {
 	Vertex* tmp = NULL;
+
 	while (pHead)
 	{
 		tmp = (pHead)->next;
 		free((pHead)->city);
-		free((pHead)->counter);
+		free(pHead);
+		pHead = tmp;
+	}
+}
+
+void Delete_Tmp(Edge* pHead)
+{
+	while (pHead)
+	{
+		Edge *tmp = (pHead)->next;
 		free(pHead);
 		pHead = tmp;
 	}
@@ -490,6 +496,70 @@ void dijkstra(struct Graph* graph, int src)
 	printArr(dist, V);
 }
 
+void dijkstra_output(struct Graph* graph, int src)
+{
+	int V = graph->V;// Get the number of vertices in graph 
+	int dist[100000];      // dist values used to pick minimum weight edge in cut 
+
+	// minHeap represents set E 
+	struct MinHeap* minHeap = createMinHeap(V);
+
+	// Initialize min heap with all vertices. dist value of all vertices  
+	for (int v = 0; v < V; ++v)
+	{
+		dist[v] = INT_MAX;
+		minHeap->array[v] = newMinHeapNode(v, dist[v]);
+		minHeap->pos[v] = v;
+	}
+
+	// Make dist value of src vertex as 0 so that it is extracted first 
+	minHeap->array[src] = newMinHeapNode(src, dist[src]);
+	minHeap->pos[src] = src;
+	dist[src] = 0;
+	decreaseKey(minHeap, src, dist[src]);
+
+	// Initially size of min heap is equal to V 
+	minHeap->size = V;
+
+	// In the followin loop, min heap contains all nodes 
+	// whose shortest distance is not yet finalized. 
+	while (!isEmpty(minHeap))
+	{
+		// Extract the vertex with minimum distance value 
+		struct MinHeapNode* minHeapNode = extractMin(minHeap);
+		int u = minHeapNode->v; // Store the extracted vertex number 
+
+		// Traverse through all adjacent vertices of u (the extracted 
+		// vertex) and update their distance values 
+		struct AdjListNode* pCrawl = graph->array[u].head;
+		while (pCrawl != NULL)
+		{
+			int v = pCrawl->dest;
+
+			// If shortest distance to v is not finalized yet, and distance to v 
+			// through u is less than its previously calculated distance 
+			if (isInMinHeap(minHeap, v) && dist[u] != INT_MAX &&
+				pCrawl->weight + dist[u] < dist[v])
+			{
+				dist[v] = dist[u] + pCrawl->weight;
+
+				// update distance value in min heap also 
+				decreaseKey(minHeap, v, dist[v]);
+			}
+			pCrawl = pCrawl->next;
+		}
+		if (!isEmpty(minHeap))
+		{
+			Delete_AdjListNode(pCrawl);
+		}
+	}
+
+
+
+	// print the calculated shortest distances 
+	printArr(dist, V);
+}
+
 // A utility function to create a new Min Heap Node 
 struct MinHeapNode* newMinHeapNode(int v, int dist)
 {
@@ -546,8 +616,8 @@ Edge * Add_New_Distance(text city_1, text city_2, int dist, Edge *head)
 	if (head == NULL)
 	{
 		head = (Edge *)malloc(sizeof(Edge));
-		head->city1 = (text)malloc(sizeof(text));
-		head->city2 = (text)malloc(sizeof(text));
+		head->city1 = (char*)malloc(10);
+		head->city2 = (char*)malloc(10);
 		strcpy(head->city1, city_1);
 		strcpy(head->city2, city_2);
 		head->distance = dist;
@@ -561,8 +631,8 @@ Edge * Add_New_Distance(text city_1, text city_2, int dist, Edge *head)
 		current_node = current_node->next;
 
 	current_node->next = (Edge *)malloc(sizeof(Edge));
-	current_node->next->city1 = (text)malloc(sizeof(text));
-	current_node->next->city2 = (text)malloc(sizeof(text));
+	current_node->next->city1 = (char*)malloc(10);
+	current_node->next->city2 = (char*)malloc(10);
 	strcpy(current_node->next->city1, city_1);	
 	strcpy(current_node->next->city2, city_2);
 	current_node->next->distance = dist;
@@ -575,7 +645,7 @@ Vertex* Add_New_City(text city_1, int c, Vertex *head)
 	if (head == NULL)
 	{
 		head = (Vertex *)malloc(sizeof(Vertex));
-		head->city = (text)malloc(sizeof(text));
+		head->city = (char*)malloc(10);
 		strcpy(head->city, city_1);
 		head->counter = c;
 		head->next = NULL;
@@ -588,7 +658,7 @@ Vertex* Add_New_City(text city_1, int c, Vertex *head)
 		current_node = current_node->next;
 
 	current_node->next = (Vertex *)malloc(sizeof(Vertex));
-	current_node->next->city = (text)malloc(sizeof(text));
+	current_node->next->city = (char*)malloc(10);
 	strcpy(current_node->next->city, city_1);
 	current_node->next->counter = c;
 	current_node->next->next = NULL;

@@ -54,6 +54,8 @@ void printArr(int dist[], int n);
 
 void dijkstra(struct Graph* graph, int src);
 
+void dijkstra_output(struct Graph* graph, int src);
+
 struct MinHeapNode* newMinHeapNode(int v, int dist);
 
 void swapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b);
@@ -66,16 +68,18 @@ Edge * Add_New_Distance(text city_1, text city_2, int dist, Edge *head);
 
 Vertex* Add_New_City(text city_1, int counter, Vertex *head);
 
-void Delete_AdjListNode(struct AdjListNode** pHead);
+void Delete_AdjListNode(struct AdjListNode* pHead);
 
-void Delete_AdjList(struct AdjList** pHead);
+void Delete_Tmp(Edge* pHead);
 
-void Delete_Graph(struct Graph** pHead);
+void Delete_AdjList(struct AdjList* pHead);
+
+void Delete_Graph(struct Graph* pHead);
 
 void Delete_MinHeap(struct MinHeap** pHead);
 
-void Delete_Edge(Edge** pHead);
+void Delete_City(Vertex* head);
 
-void Delete_Vertex(Vertex** pHead);
+void Delete_Distance(Edge* pHead);
 
 #endif

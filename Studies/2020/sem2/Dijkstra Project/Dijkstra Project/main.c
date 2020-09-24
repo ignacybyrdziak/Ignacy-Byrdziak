@@ -20,13 +20,13 @@ int main(int argc, char *argv[])
 	FILE * pFile, *fp;
 	char buf[1024], c[10];
 	Edge* tmp = (Edge *)malloc(sizeof(Edge));
+	tmp->city1 = (char*)malloc(10);
+	tmp->city2 = (char*)malloc(10);
 
 	for (int n = 0; n < 10; n++)
-	{
 		c[n] = NULL;
-	}
 
-	for (int i = 1; i < argc; i++)
+	for (int i = 1; i < argc-1; i++)
 	{
 		if (strcmp(argv[i], "-i") == 0)
 		{
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				while (fgets(buf,1024,pFile) >= 1024)//nieskoczonosc
+				while (fgets(buf,1024,pFile) >= 1024)
 				{
 					mod_counter = 1;
 					space_counter = 0;
@@ -71,7 +71,6 @@ int main(int argc, char *argv[])
 									Printing_City_On_Called_Position(cities_position, list_of_cities);
 									cities_position++;
 								}
-								tmp->city1 = (text)malloc(sizeof(text));
 								strcpy_s(tmp->city1, 10, c);
 							}
 							if (mod_counter % 3 == 2)
@@ -82,15 +81,12 @@ int main(int argc, char *argv[])
 									Printing_City_On_Called_Position(cities_position, list_of_cities);
 									cities_position++;
 								}
-								tmp->city2 = (text)malloc(sizeof(text));
 								strcpy_s(tmp->city2, 10, c);
 							}
 							mod_counter++;
 
 							for (int n = 0; n < 10; n++)
-							{
 								c[n] = NULL;
-							}
 						}
 						else
 						{
@@ -100,12 +96,14 @@ int main(int argc, char *argv[])
 					}
 				}
 			}
+
+			fclose(pFile);
 			i++;
+			printf("\n");
 		}
 		else if (strcmp(argv[i], "-o") == 0)
 		{
-			//output_file = argv[i+1];
-			//fp = fopen_s(&pFile, input_file, "w");
+			output_file = argv[i+1];
 
 			struct Graph* graph = createGraph(cities_position);
 			while (list_of_distances)
@@ -114,87 +112,61 @@ int main(int argc, char *argv[])
 				list_of_distances = list_of_distances->next;
 			}
 				
-
-			dijkstra(graph, 0);
-
-			//Delete_Vertex(list_of_cities);
-			//Delete_Edge(list_of_distances);
-			free(graph);
+			fp = fopen_s(&pFile, output_file, "w");
+			dijkstra_output(graph, 0);
 
 			i++;
+			printf("\n");
 		}
-		else if (strcmp(argv[i], "-p") == 0)
-		{
-			struct Graph* graph = createGraph(cities_position);
-			while (list_of_distances)
-				addEdge(graph, list_of_distances->city1, list_of_distances->city1, list_of_distances->distance);
-			
-			dijkstra(graph, 0);
-			
-			//Delete_Vertex(list_of_cities);
-			//Delete_Edge(list_of_distances);
-			free(graph);
+		//else if (strcmp(argv[i], "-p") == 0)
+		//{
+		//	struct Graph* graph = createGraph(cities_position);
+		//	while (list_of_distances)
+		//	{
+		//		addEdge(graph, Finding_City_Position_From_A_List(list_of_distances->city1, list_of_cities), Finding_City_Position_From_A_List(list_of_distances->city2, list_of_cities), list_of_distances->distance);
+		//		list_of_distances = list_of_distances->next;
+		//	}
 
-		}
+		//	dijkstra(graph, 0);
+		//	Delete_Graph(graph);
+		//printf("\n");
+		//}
 		else if (strcmp(argv[i], "-h") == 0)
 		{
 			printf("Help Panel:\nPlease use parameters from list below:\n -i if you want to read from choosen file\n -o if you want to save data to choosen file\n -p if you want to print data to console\n\n");
 			i++;
+			printf("\n");
 		}
 		else
 		{
 			printf("Help Panel:\nPlease use parameters from list below:\n -i if you want to read from choosen file\n -o if you want to save data to choosen file\n -p if you want to print data to console\n\n");
+			printf("\n");
 		}
+
 	}
 
 	printf("\n");
 
-	/*Delete_AdjListNode(pHead);
+	
+	//free(graph);
 
-	Delete_AdjList(pHead);
+	Delete_City(list_of_cities);
 
-	Delete_Graph(pHead);
+	Delete_Distance(list_of_distances);
 
-	Delete_MinHeap(pHead);
+	//Delete_AdjListNode(pHead);
 
-	Delete_Edge(list_of_distances);
+	//Delete_AdjList(pHead);
 
-	Delete_Vertex(list_of_cities);*/
+	//Delete_Graph(pHead);
 
-	//for (int i = 0; i < cities_position; i++)
-	//{
-		free(list_of_cities);
-	//}
-		free(list_of_distances);
+	//Delete_MinHeap(pHead);
+
+	free(tmp->city1);
+	free(tmp->city2);
+	free(tmp);
 
 	return 0;
-
 }
-
-
-
-
-		// Usuwamy tablice dynamiczne
-
-	//	delete[] d;
-	//	delete[] p;
-	//	delete[] QS;
-	//	delete[] S;
-
-	//	for (i = 0; i < CNT; i++)
-	//	{
-	//		pw = graf[i];
-	//		while (pw)
-	//		{
-	//			rw = pw;
-	//			pw = pw->next;
-	//			delete rw;
-	//		}
-	//	}
-
-	//	delete[] graf;
-
-	//	return 0;
-	//}
 
 	
