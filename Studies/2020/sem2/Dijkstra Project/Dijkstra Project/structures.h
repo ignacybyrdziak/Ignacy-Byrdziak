@@ -48,19 +48,19 @@ struct MinHeap
 	struct MinHeapNode **array;
 };
 
-typedef struct edge
+struct edge
 {
 	text city1;
 	text city2;
 	int distance;
 	struct edge *next;
-} Edge; 
+}; 
 
-typedef struct vertex
+struct vertex
 {
 	int counter;
 	text city;
 	struct vertex *next;
-} Vertex;
+};
 
 #endif

@@ -17,76 +17,18 @@ struct MinHeap* createMinHeap(int capacity)
 		(struct MinHeapNode**) malloc(capacity * sizeof(struct MinHeapNode*));
 	return minHeap;
 }
-//
-//slistEL * Assinging_Value_To_A_Graf(slistEL *pw, int position, slistEL *head)
-//{
-//	slistEL *current_node = head;
-//	int counter = 0;
-//	while (counter != position)
-//	{
-//		current_node = current_node->next;
-//		counter++;
-//	}
-//	current_node = pw;
-//	return head;
-//}
-//
-//Zbiory * Assinging_Value_To_A_Zbior(bool b, int position, Zbiory*head)
-//{
-//	Zbiory *current_node = head;
-//	int counter = 0;
-//	while (counter != position)
-//	{
-//		current_node = current_node->next;
-//		counter++;
-//	}
-//	current_node->p = b;
-//	return head;
-//}
-//
-//bool * Is_There_A_Node(int position, slistEL *head)
-//{
-//	if (head == NULL)
-//		return false;
-//	slistEL *current_node = head;
-//	int counter = 0;
-//	while (counter != position)
-//	{
-//		current_node = current_node->next;
-//		if (current_node == NULL)
-//			return false;
-//		counter++;
-//	}
-//	return true;
-//}
-//
-int Finding_City_Position_From_A_List(text city_to_find, Vertex *head)
+
+int Finding_City_Position_From_A_List(text city_to_find, struct vertex *head)
 {
-	Vertex *current_node = head;
+	struct vertex *current_node = head;
 	while (strcmp(current_node->city , city_to_find) != 0)
 		current_node = current_node->next;
 	return current_node->counter;
 }
-//
-//slistEL *Finding_Value_From_A_Graf(int position, slistEL *head)
-//{
-//	if (head == false)
-//		return NULL;
-//	slistEL *current_node = head;
-//	int counter = 0;
-//	while (counter != position)
-//	{
-//		current_node = current_node->next;
-//		if (current_node == NULL)
-//			return NULL;
-//		counter++;
-//	}
-//	return current_node;
-//}
-//
-void Printing_City_On_Called_Position(int position, Vertex *head)
+
+void Printing_City_On_Called_Position(int position, struct vertex *head)
 {
-	Vertex *current_node = head;
+	struct vertex *current_node = head;
 	int counter = 0;
 	while (counter != position)
 	{
@@ -96,9 +38,9 @@ void Printing_City_On_Called_Position(int position, Vertex *head)
 	printf("%d.City: %s\n", position+1, current_node->city);
 }
 
-void Printing_Distance_On_Called_Position(int position, Edge *head)
+void Printing_Distance_On_Called_Position(int position, struct edge *head)
 {
-	Edge *current_node = head;
+	struct edge *current_node = head;
 	int counter = 0;
 	while (counter != position)
 	{
@@ -107,96 +49,6 @@ void Printing_Distance_On_Called_Position(int position, Edge *head)
 	}
 	printf("%d.Distance: %s %s %d\n", position+1, current_node->city1, current_node->city2, current_node->distance);
 }
-//
-//slistEL *Add_New_Element_To_Graf(slistEL *head, slistEL *pw)
-//{
-//	if (head == NULL)
-//	{
-//		head = (slistEL *)malloc(sizeof(slistEL));
-//		head = pw;
-//		head->next = NULL;
-//		return head;
-//	}
-//
-//	slistEL*current_node = head;
-//
-//	while (current_node->next != NULL)
-//		current_node = current_node->next;
-//
-//	current_node->next = (slistEL *)malloc(sizeof(slistEL));
-//	current_node->next = pw;
-//	current_node->next->next = NULL;
-//	return head;
-//}
-//
-//Zbiory *Add_New_Element_To_Q(Zbiory *head)
-//{
-//	if (head == NULL)
-//	{
-//		head = (Zbiory *)malloc(sizeof(Zbiory));
-//		head->p = false;
-//		head->next = NULL;
-//		return head;
-//	}
-//
-//	Zbiory*current_node = head;
-//
-//	while (current_node->next != NULL)
-//		current_node = current_node->next;
-//
-//	current_node->next = (Zbiory *)malloc(sizeof(Zbiory));
-//	current_node->next->p = false;
-//	current_node->next->next = NULL;
-//	return head;
-//}
-//
-//Zwykla *Add_New_Element_To_A_List(int val, Zwykla *head)
-//{
-//	if (head == NULL)
-//	{
-//		head = (Zwykla *)malloc(sizeof(Zwykla));
-//		head->v = val;
-//		head->next = NULL;
-//		return head;
-//	}
-//
-//	Zwykla*current_node = head;
-//
-//	while (current_node->next != NULL)
-//		current_node = current_node->next;
-//
-//	current_node->next = (Zwykla *)malloc(sizeof(Zwykla));
-//	current_node->next->v = val;
-//	current_node->next->next = NULL;
-//	return head;
-//}
-//
-//bool Finding_Value_From_Zbior(int position, Zbiory *head)
-//{
-//	Zbiory *current_node = head;
-//	int counter = 0;
-//	while (counter != position)
-//	{
-//		current_node = current_node->next;
-//		counter++;
-//	}
-//	return current_node->p;
-//}
-//
-//Zwykla *Assinging_Value_To_A_List(int val, int position, Zwykla *head)
-//{
-//	Zwykla *current_node = head;
-//	int counter = 0;
-//	while (counter != position)
-//	{
-//		current_node = current_node->next;
-//		counter++;
-//	}
-//	current_node->v = val;
-//	return head;
-//}
-
-
 
 // A utility function to create a new adjacency list node 
 
@@ -248,11 +100,11 @@ void Delete_MinHeap(struct MinHeap** pHead)
 	}
 }
 
-void Delete_Distance(Edge* pHead)
+void Delete_Distance(struct edge* pHead)
 {
 	while (pHead)
 	{
-		Edge *tmp = (pHead)->next;
+		struct edge *tmp = (pHead)->next;
 		free((pHead)->city1);
 		free((pHead)->city2);
 		free(pHead);
@@ -260,9 +112,9 @@ void Delete_Distance(Edge* pHead)
 	}
 }
 
-void Delete_City(Vertex* pHead)
+void Delete_City(struct vertex* pHead)
 {
-	Vertex* tmp = NULL;
+	struct vertex* tmp = NULL;
 
 	while (pHead)
 	{
@@ -273,11 +125,11 @@ void Delete_City(Vertex* pHead)
 	}
 }
 
-void Delete_Tmp(Edge* pHead)
+void Delete_Tmp(struct edge* pHead)
 {
 	while (pHead)
 	{
-		Edge *tmp = (pHead)->next;
+		struct edge *tmp = (pHead)->next;
 		free(pHead);
 		pHead = tmp;
 	}
@@ -430,6 +282,14 @@ void printArr(int dist[], int n)
 		printf("%d \t\t %d\n", i, dist[i]);
 }
 
+// A utility function used to print the solution 
+void printArr_to_File(int dist[], int n, FILE *fp)
+{
+	fprintf(fp,"Vertex   Distance from Source\n");
+	for (int i = 0; i < n; ++i)
+		fprintf(fp,"%d \t\t %d\n", i, dist[i]);
+}
+
 // The main function that calulates distances of shortest paths from src to all 
 // vertices. It is a O(ELogV) function 
 void dijkstra(struct Graph* graph, int src)
@@ -484,10 +344,10 @@ void dijkstra(struct Graph* graph, int src)
 			}
 			pCrawl = pCrawl->next;
 		}
-		if (!isEmpty(minHeap))
-		{
-			Delete_AdjListNode(pCrawl);
-		}
+		//if (!isEmpty(minHeap))
+		//{
+		//	Delete_AdjListNode(pCrawl);
+		//}
 	}
 
 
@@ -496,7 +356,7 @@ void dijkstra(struct Graph* graph, int src)
 	printArr(dist, V);
 }
 
-void dijkstra_output(struct Graph* graph, int src)
+void dijkstra_output(struct Graph* graph, int src, FILE *fp)
 {
 	int V = graph->V;// Get the number of vertices in graph 
 	int dist[100000];      // dist values used to pick minimum weight edge in cut 
@@ -557,7 +417,7 @@ void dijkstra_output(struct Graph* graph, int src)
 
 
 	// print the calculated shortest distances 
-	printArr(dist, V);
+	printArr_to_File(dist, V, fp);
 }
 
 // A utility function to create a new Min Heap Node 
@@ -578,12 +438,12 @@ void swapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b)
 	*b = t;
 }
 
-bool Finding_Duplicate_Distances(text city_1, text city_2, Edge *head)
+bool Finding_Duplicate_Distances(text city_1, text city_2, struct edge *head)
 {
 	if (head == NULL)
 		return true;
 
-	Edge * current_node = head;
+	struct edge * current_node = head;
 
 	while (current_node != NULL)
 	{
@@ -595,12 +455,12 @@ bool Finding_Duplicate_Distances(text city_1, text city_2, Edge *head)
 	return true;
 }
 
-bool Finding_Duplicate_Cities(text city_1, Vertex *head)
+bool Finding_Duplicate_Cities(text city_1, struct vertex *head)
 {
 	if (head == NULL)
 		return true;
 
-	Vertex * current_node = head;
+	struct vertex * current_node = head;
 
 	while (current_node != NULL)
 	{
@@ -611,11 +471,11 @@ bool Finding_Duplicate_Cities(text city_1, Vertex *head)
 	return true;
 }
 
-Edge * Add_New_Distance(text city_1, text city_2, int dist, Edge *head)
+struct edge * Add_New_Distance(text city_1, text city_2, int dist, struct edge *head)
 {
 	if (head == NULL)
 	{
-		head = (Edge *)malloc(sizeof(Edge));
+		head = (struct edge *)malloc(sizeof(struct edge));
 		head->city1 = (char*)malloc(10);
 		head->city2 = (char*)malloc(10);
 		strcpy(head->city1, city_1);
@@ -625,12 +485,12 @@ Edge * Add_New_Distance(text city_1, text city_2, int dist, Edge *head)
 		return head;
 	}
 
-	Edge *current_node = head;
+	struct edge *current_node = head;
 
 	while (current_node->next != NULL)
 		current_node = current_node->next;
 
-	current_node->next = (Edge *)malloc(sizeof(Edge));
+	current_node->next = (struct edge *)malloc(sizeof(struct edge));
 	current_node->next->city1 = (char*)malloc(10);
 	current_node->next->city2 = (char*)malloc(10);
 	strcpy(current_node->next->city1, city_1);	
@@ -640,11 +500,11 @@ Edge * Add_New_Distance(text city_1, text city_2, int dist, Edge *head)
 	return head;
 }
 
-Vertex* Add_New_City(text city_1, int c, Vertex *head)
+struct vertex* Add_New_City(text city_1, int c, struct vertex *head)
 {
 	if (head == NULL)
 	{
-		head = (Vertex *)malloc(sizeof(Vertex));
+		head = (struct vertex *)malloc(sizeof(struct vertex));
 		head->city = (char*)malloc(10);
 		strcpy(head->city, city_1);
 		head->counter = c;
@@ -652,12 +512,12 @@ Vertex* Add_New_City(text city_1, int c, Vertex *head)
 		return head;
 	}
 
-	Vertex *current_node = head;
+	struct vertex *current_node = head;
 	
 	while (current_node->next != NULL)
 		current_node = current_node->next;
 
-	current_node->next = (Vertex *)malloc(sizeof(Vertex));
+	current_node->next = (struct vertex *)malloc(sizeof(struct vertex));
 	current_node->next->city = (char*)malloc(10);
 	strcpy(current_node->next->city, city_1);
 	current_node->next->counter = c;

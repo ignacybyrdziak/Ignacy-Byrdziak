@@ -15,13 +15,14 @@ int main(int argc, char *argv[])
 
 	text input_file, output_file;
 	int cities_position = 0, distance_position = 0, mod_counter = 1, character_counter = 0, space_counter;
-	Edge *list_of_distances = NULL;
-	Vertex *list_of_cities = NULL;
+	struct edge *list_of_distances = NULL;
+	struct vertex *list_of_cities = NULL;
 	FILE * pFile, *fp;
 	char buf[1024], c[10];
-	Edge* tmp = (Edge *)malloc(sizeof(Edge));
+	struct edge* tmp = (struct edge *)malloc(sizeof(struct edge));
 	tmp->city1 = (char*)malloc(10);
 	tmp->city2 = (char*)malloc(10);
+	text starting_city;
 
 	for (int n = 0; n < 10; n++)
 		c[n] = NULL;
@@ -52,7 +53,7 @@ int main(int argc, char *argv[])
 								if (Finding_Duplicate_Distances(tmp->city1, tmp->city2, list_of_distances))
 								{
 									list_of_distances = Add_New_Distance(tmp->city1, tmp->city2, atoi(c), list_of_distances);
-									Printing_Distance_On_Called_Position(distance_position, list_of_distances);
+								//	Printing_Distance_On_Called_Position(distance_position, list_of_distances);
 									distance_position++;
 								}
 							}
@@ -68,7 +69,7 @@ int main(int argc, char *argv[])
 								if (Finding_Duplicate_Cities(c, list_of_cities))
 								{
 									list_of_cities = Add_New_City(c, cities_position, list_of_cities);
-									Printing_City_On_Called_Position(cities_position, list_of_cities);
+								//	Printing_City_On_Called_Position(cities_position, list_of_cities);
 									cities_position++;
 								}
 								strcpy_s(tmp->city1, 10, c);
@@ -78,7 +79,7 @@ int main(int argc, char *argv[])
 								if (Finding_Duplicate_Cities(c, list_of_cities))
 								{
 									list_of_cities = Add_New_City(c, cities_position, list_of_cities);
-									Printing_City_On_Called_Position(cities_position, list_of_cities);
+								//	Printing_City_On_Called_Position(cities_position, list_of_cities);
 									cities_position++;
 								}
 								strcpy_s(tmp->city2, 10, c);
@@ -106,14 +107,25 @@ int main(int argc, char *argv[])
 			output_file = argv[i+1];
 
 			struct Graph* graph = createGraph(cities_position);
-			while (list_of_distances)
+			struct edge *current_node = list_of_distances;
+
+			while (current_node)
 			{
-				addEdge(graph, Finding_City_Position_From_A_List(list_of_distances->city1, list_of_cities), Finding_City_Position_From_A_List(list_of_distances->city2, list_of_cities), list_of_distances->distance);
-				list_of_distances = list_of_distances->next;
+				//addEdge(graph, Finding_City_Position_From_A_List(current_node->city1, list_of_cities), Finding_City_Position_From_A_List(current_node->city2, list_of_cities), current_node->distance);
+				current_node = current_node->next;
 			}
 				
 			fp = fopen_s(&pFile, output_file, "w");
-			dijkstra_output(graph, 0);
+			printf("Which city do you want to see distances too?\n");
+			//scanf_s("%s", starting_city);
+
+			//podawanie node'a zrobiæ
+
+			dijkstra_output(graph, Finding_City_Position_From_A_List(starting_city, list_of_cities) , pFile);
+
+			fclose(pFile);
+
+			Delete_Graph(graph);
 
 			i++;
 			printf("\n");
@@ -121,15 +133,20 @@ int main(int argc, char *argv[])
 		//else if (strcmp(argv[i], "-p") == 0)
 		//{
 		//	struct Graph* graph = createGraph(cities_position);
-		//	while (list_of_distances)
+		//	struct edge *current_node = list_of_distances;
+
+		//	while (current_node)
 		//	{
-		//		addEdge(graph, Finding_City_Position_From_A_List(list_of_distances->city1, list_of_cities), Finding_City_Position_From_A_List(list_of_distances->city2, list_of_cities), list_of_distances->distance);
-		//		list_of_distances = list_of_distances->next;
+		//		//addEdge(graph, Finding_City_Position_From_A_List(current_node->city1, list_of_cities), Finding_City_Position_From_A_List(current_node->city2, list_of_cities), current_node->distance);
+		//		current_node = current_node->next;
 		//	}
 
 		//	dijkstra(graph, 0);
+
 		//	Delete_Graph(graph);
-		//printf("\n");
+
+		//	i++;
+		//	printf("\n");
 		//}
 		else if (strcmp(argv[i], "-h") == 0)
 		{
@@ -153,6 +170,9 @@ int main(int argc, char *argv[])
 	Delete_City(list_of_cities);
 
 	Delete_Distance(list_of_distances);
+
+	//free(list_of_cities->city);
+	//free(list_of_cities);
 
 	//Delete_AdjListNode(pHead);
 
