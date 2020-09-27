@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);	//Memory leak searching
 
-	printf("The program has got default parameters \n-i citiesInput.txt -o citiesOutpit2.txt -p -h \nbut you can change them in Project->Properties->Debugging or \nerase them and input parameters some other way, for exaple through the console\n");
+	printf("The program has got default parameters \n-i citiesInput.txt -o citiesOutput.txt -p -h \nbut you can change them in Project->Properties->Debugging or \nerase them and input parameters some other way, for exaple through the console\n");
 
 	Text inputFile, outputFile;		//Input and output files
 	int citiesPostition = 0, distancePosition = 0, columnCounter = 1, characterCounter = 0, whiteMarkCounter;	//Counters to move through input file and count cities and distances
