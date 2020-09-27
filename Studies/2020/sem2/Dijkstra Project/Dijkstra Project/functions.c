@@ -5,6 +5,68 @@
 
 #include "functions.h"
 
+// A utility function to delete an adjacency list node
+void DeleteAdjListNode(struct AdjListNode* pHead)
+{
+	struct AdjListNode* tmp = NULL;
+	while (pHead)
+	{
+		tmp = (pHead)->next;
+		free(pHead);
+		pHead = tmp;
+	}
+}
+
+// A utility function to delete an adjacency list
+void DeleteAdjList(struct AdjList* pHead)
+{
+	struct AdjList* tmp = NULL;
+	while (pHead)
+	{
+		tmp = (pHead)->head;
+		free(pHead);
+		pHead = tmp;
+	}
+}
+
+// A utility function to delete a graph
+void DeleteGraph(struct Graph* pHead)
+{
+	while (pHead)
+	{
+		struct Graph *tmp = (pHead)->array;
+		free(pHead);
+		pHead = tmp;
+	}
+}
+
+// A utility function to delete a distance list
+void DeleteDistance(struct Edge* pHead)
+{
+	while (pHead)
+	{
+		struct Edge *tmp = (pHead)->next;
+		free((pHead)->city1);
+		free((pHead)->city2);
+		free(pHead);
+		pHead = tmp;
+	}
+}
+
+// A utility function to delete a city list
+void DeleteCity(struct Vertex* pHead)
+{
+	struct Vertex* tmp = NULL;
+
+	while (pHead)
+	{
+		tmp = (pHead)->next;
+		free((pHead)->city);
+		free(pHead);
+		pHead = tmp;
+	}
+}
+
 // A utility function to create a Min Heap 
 struct MinHeap* createMinHeap(int capacity)
 {
@@ -16,112 +78,8 @@ struct MinHeap* createMinHeap(int capacity)
 	return minHeap;
 }
 
-int Finding_City_Position_From_A_List(text city_to_find, struct vertex *head)
-{
-	struct vertex *current_node = head;
-	while (strcmp(current_node->city , city_to_find) != 0)
-		current_node = current_node->next;
-	return current_node->counter;
-}
-
-void Printing_City_On_Called_Position(int position, struct vertex *head)
-{
-	struct vertex *current_node = head;
-	int counter = 0;
-	while (counter != position)
-	{
-		current_node = current_node->next;
-		counter++;
-	}
-	printf("%d.City: %s\n", position+1, current_node->city);
-}
-
-void Printing_Distance_On_Called_Position(int position, struct edge *head)
-{
-	struct edge *current_node = head;
-	int counter = 0;
-	while (counter != position)
-	{
-		current_node = current_node->next;
-		counter++;
-	}
-	printf("%d.Distance: %s %s %d\n", position+1, current_node->city1, current_node->city2, current_node->distance);
-}
-
-// A utility function to create a new adjacency list node 
-
-void Delete_AdjListNode(struct AdjListNode* pHead)
-{
-	struct AdjListNode* tmp = NULL;
-	while (pHead)
-	{
-		tmp = (pHead)->next;
-		free(pHead);
-		pHead = tmp;
-	}
-}
-
-void Delete_AdjList(struct AdjList* pHead)
-{
-	struct AdjList* tmp = NULL;
-	while (pHead)
-	{
-		tmp = (pHead)->head;
-		free(pHead);
-		pHead = tmp;
-	}
-}
-
-void Delete_Graph(struct Graph* pHead)
-{
-	while (pHead)
-	{
-		struct Graph *tmp = (pHead)->array;
-		free(pHead);
-		pHead = tmp;
-	}
-}
-
-//void Delete_MinHeap(struct MinHeap** pHead)
-//{
-//	struct MinHeap* tmp = NULL;
-//	while (*pHead)
-//	{
-//		tmp = (*pHead)->array;
-//		free((*pHead)->capacity);
-//		free((*pHead)->pos);
-//		free((*pHead)->size);
-//		free(*pHead);
-//		*pHead = tmp;
-//	}
-//}
-
-void Delete_Distance(struct edge* pHead)
-{
-	while (pHead)
-	{
-		struct edge *tmp = (pHead)->next;
-		free((pHead)->city1);
-		free((pHead)->city2);
-		free(pHead);
-		pHead = tmp;
-	}
-}
-
-void Delete_City(struct vertex* pHead)
-{
-	struct vertex* tmp = NULL;
-
-	while (pHead)
-	{
-		tmp = (pHead)->next;
-		free((pHead)->city);
-		free(pHead);
-		pHead = tmp;
-	}
-}
-
-struct AdjListNode* newAdjListNode(int dest, int weight)
+// A utility function to create a new adjacency list node
+struct AdjListNode* NewAdjListNode(int dest, int weight)
 {
 	struct AdjListNode* newNode = (struct AdjListNode*) malloc(sizeof(struct AdjListNode));
 	newNode->dest = dest;
@@ -131,7 +89,7 @@ struct AdjListNode* newAdjListNode(int dest, int weight)
 }
 
 // A utility function that creates a graph of V vertices 
-struct Graph* createGraph(int V)
+struct Graph* CreateGraph(int V)
 {
 	struct Graph* graph = (struct Graph*) malloc(sizeof(struct Graph));
 	graph->V = V;
@@ -147,16 +105,16 @@ struct Graph* createGraph(int V)
 }
 
 // Adds an edge to an undirected graph 
-void addEdge(struct Graph* graph, int src, int dest, int weight)
+void AddEdge(struct Graph* graph, int src, int dest, int weight)
 {
 	// Add an edge from src to dest.  A new node is added to the adjacency 
 	// list of src.  The node is added at the beginning 
-	struct AdjListNode* newNode = newAdjListNode(dest, weight);
+	struct AdjListNode* newNode = NewAdjListNode(dest, weight);
 	newNode->next = graph->array[src].head;
 	graph->array[src].head = newNode;
 
 	// Since graph is undirected, add an edge from dest to src also 
-	newNode = newAdjListNode(src, weight);
+	newNode = NewAdjListNode(src, weight);
 	newNode->next = graph->array[dest].head;
 	graph->array[dest].head = newNode;
 }
@@ -164,7 +122,7 @@ void addEdge(struct Graph* graph, int src, int dest, int weight)
 // A standard function to heapify at given idx 
 // This function also updates position of nodes when they are swapped. 
 // Position is needed for decreaseKey() 
-void minHeapify(struct MinHeap* minHeap, int idx)
+void MinHeapify(struct MinHeap* minHeap, int idx)
 {
 	int smallest, left, right;
 	smallest = idx;
@@ -190,22 +148,22 @@ void minHeapify(struct MinHeap* minHeap, int idx)
 		minHeap->pos[idxNode->v] = smallest;
 
 		// Swap nodes 
-		swapMinHeapNode(&minHeap->array[smallest], &minHeap->array[idx]);
+		SwapMinHeapNode(&minHeap->array[smallest], &minHeap->array[idx]);
 
-		minHeapify(minHeap, smallest);
+		MinHeapify(minHeap, smallest);
 	}
 }
 
 // A utility function to check if the given minHeap is ampty or not 
-int isEmpty(struct MinHeap* minHeap)
+int IsEmpty(struct MinHeap* minHeap)
 {
 	return minHeap->size == 0;
 }
 
 // Standard function to extract minimum node from heap 
-struct MinHeapNode* extractMin(struct MinHeap* minHeap)
+struct MinHeapNode* ExtractMin(struct MinHeap* minHeap)
 {
-	if (isEmpty(minHeap))
+	if (IsEmpty(minHeap))
 		return NULL;
 
 	// Store the root node 
@@ -221,14 +179,14 @@ struct MinHeapNode* extractMin(struct MinHeap* minHeap)
 
 	// Reduce heap size and heapify root 
 	--minHeap->size;
-	minHeapify(minHeap, 0);
+	MinHeapify(minHeap, 0);
 
 	return root;
 }
 
 // Function to decreasy dist value of a given vertex v. This function 
 // uses pos[] of min heap to get the current index of node in min heap 
-void decreaseKey(struct MinHeap* minHeap, int v, int dist)
+void DecreaseKey(struct MinHeap* minHeap, int v, int dist)
 {
 	// Get the index of v in  heap array 
 	int i = minHeap->pos[v];
@@ -243,7 +201,7 @@ void decreaseKey(struct MinHeap* minHeap, int v, int dist)
 		// Swap this node with its parent 
 		minHeap->pos[minHeap->array[i]->v] = (i - 1) / 2;
 		minHeap->pos[minHeap->array[(i - 1) / 2]->v] = i;
-		swapMinHeapNode(&minHeap->array[i], &minHeap->array[(i - 1) / 2]);
+		SwapMinHeapNode(&minHeap->array[i], &minHeap->array[(i - 1) / 2]);
 
 		// move to parent index 
 		i = (i - 1) / 2;
@@ -252,35 +210,53 @@ void decreaseKey(struct MinHeap* minHeap, int v, int dist)
 
 // A utility function to check if a given vertex 
 // 'v' is in min heap or not 
-bool isInMinHeap(struct MinHeap *minHeap, int v)
+bool IsInMinHeap(struct MinHeap *minHeap, int v)
 {
 	if (minHeap->pos[v] < minHeap->size)
 		return true;
 	return false;
 }
 
-// A utility function used to print the solution 
-void printArr(int dist[], int n)
-{	//napisac funkcje odwrotna, ktora bedzie wpisywala po indeksie nazwe
-	printf("\nCity:   Distance from source city:\n");
-	for (int i = 0; i < n; ++i)
-		printf("%d \t\t %d\n", i, dist[i]);
+// A utility function to return position of a city with given name of it
+int FindingCityPositionFromAList(Text city_to_find, struct Vertex *head)
+{
+	struct Vertex *current_node = head;
+	while (strcmp(current_node->city, city_to_find) != 0)
+		current_node = current_node->next;
+	return current_node->counter;
+}
+
+// A utility function to return name of a city with position of it
+Text FindingCityNameFromAList(int position, struct Vertex *head)
+{
+	struct Vertex *current_node = head;
+	while (current_node->counter != position)
+		current_node = current_node->next;
+	return current_node->city;
 }
 
 // A utility function used to print the solution 
-void printArr_to_File(int dist[], int n, FILE *fp)
+void PrintArr(int dist[], int n, struct Vertex *list)
+{	//napisac funkcje odwrotna, ktora bedzie wpisywala po indeksie nazwe
+	printf("\nCity:   Distance from source city:\n");
+	for (int i = 0; i < n; ++i)
+		printf("%s \t\t %d\n", FindingCityNameFromAList(i, list), dist[i]);
+}
+
+// A utility function used to print the solution into output file
+void PrintArrToFile(int dist[], int n, FILE *fp, struct Vertex *list)
 {
 	fprintf(fp, "City:   Distance from source city:\n");
 	for (int i = 0; i < n; ++i)
-		fprintf(fp,"%d \t\t %d\n", i, dist[i]);
+		fprintf(fp,"%s \t\t %d\n", FindingCityNameFromAList(i, list), dist[i]);
 }
 
 // The main function that calulates distances of shortest paths from src to all 
 // vertices. It is a O(ELogV) function 
-void dijkstra(struct Graph* graph, int src)
+void Dijkstra(struct Graph* graph, int src, struct Vertex *list)
 {
 	int V = graph->V;// Get the number of vertices in graph 
-	int dist[100000];      // dist values used to pick minimum weight edge in cut 
+	int dist[100000];      // Dist values used to pick minimum weight edge in cut 
 
 	// minHeap represents set E 
 	struct MinHeap* minHeap = createMinHeap(V);
@@ -289,25 +265,25 @@ void dijkstra(struct Graph* graph, int src)
 	for (int v = 0; v < V; ++v)
 	{
 		dist[v] = INT_MAX;
-		minHeap->array[v] = newMinHeapNode(v, dist[v]);
+		minHeap->array[v] = NewMinHeapNode(v, dist[v]);
 		minHeap->pos[v] = v;
 	}
 
 	// Make dist value of src vertex as 0 so that it is extracted first 
-	minHeap->array[src] = newMinHeapNode(src, dist[src]);
+	minHeap->array[src] = NewMinHeapNode(src, dist[src]);
 	minHeap->pos[src] = src;
 	dist[src] = 0;
-	decreaseKey(minHeap, src, dist[src]);
+	DecreaseKey(minHeap, src, dist[src]);
 
 	// Initially size of min heap is equal to V 
 	minHeap->size = V;
 
 	// In the followin loop, min heap contains all nodes 
 	// whose shortest distance is not yet finalized. 
-	while (!isEmpty(minHeap))
+	while (!IsEmpty(minHeap))
 	{
 		// Extract the vertex with minimum distance value 
-		struct MinHeapNode* minHeapNode = extractMin(minHeap);
+		struct MinHeapNode* minHeapNode = ExtractMin(minHeap);
 		int u = minHeapNode->v; // Store the extracted vertex number 
 
 		// Traverse through all adjacent vertices of u (the extracted 
@@ -319,29 +295,28 @@ void dijkstra(struct Graph* graph, int src)
 
 			// If shortest distance to v is not finalized yet, and distance to v 
 			// through u is less than its previously calculated distance 
-			if (isInMinHeap(minHeap, v) && dist[u] != INT_MAX &&
+			if (IsInMinHeap(minHeap, v) && dist[u] != INT_MAX &&
 				pCrawl->weight + dist[u] < dist[v])
 			{
 				dist[v] = dist[u] + pCrawl->weight;
 
-				// update distance value in min heap also 
-				decreaseKey(minHeap, v, dist[v]);
+				// Update distance value in min heap also 
+				DecreaseKey(minHeap, v, dist[v]);
 			}
 			pCrawl = pCrawl->next;
 		}
-		//if (!isEmpty(minHeap))
-		//{
-			Delete_AdjListNode(pCrawl);
-		//}
+		DeleteAdjListNode(pCrawl);
 	}
 	// print the calculated shortest distances 
-	printArr(dist, V);
+	PrintArr(dist, V, list);
 }
 
-void dijkstra_output(struct Graph* graph, int src, FILE *fp)
+// The main function that calulates distances of shortest paths from src to all 
+// vertices. It is a O(ELogV) function (but it contains printing to output file
+void DijkstraOutput(struct Graph* graph, int src, FILE *fp, struct Vertex *list)
 {
 	int V = graph->V;// Get the number of vertices in graph 
-	int dist[100000];      // dist values used to pick minimum weight edge in cut 
+	int dist[100000];      // Dist values used to pick minimum weight edge in cut 
 
 	// minHeap represents set E 
 	struct MinHeap* minHeap = createMinHeap(V);
@@ -350,25 +325,25 @@ void dijkstra_output(struct Graph* graph, int src, FILE *fp)
 	for (int v = 0; v < V; ++v)
 	{
 		dist[v] = INT_MAX;
-		minHeap->array[v] = newMinHeapNode(v, dist[v]);
+		minHeap->array[v] = NewMinHeapNode(v, dist[v]);
 		minHeap->pos[v] = v;
 	}
 
 	// Make dist value of src vertex as 0 so that it is extracted first 
-	minHeap->array[src] = newMinHeapNode(src, dist[src]);
+	minHeap->array[src] = NewMinHeapNode(src, dist[src]);
 	minHeap->pos[src] = src;
 	dist[src] = 0;
-	decreaseKey(minHeap, src, dist[src]);
+	DecreaseKey(minHeap, src, dist[src]);
 
 	// Initially size of min heap is equal to V 
 	minHeap->size = V;
 
 	// In the followin loop, min heap contains all nodes 
 	// whose shortest distance is not yet finalized. 
-	while (!isEmpty(minHeap))
+	while (!IsEmpty(minHeap))
 	{
 		// Extract the vertex with minimum distance value 
-		struct MinHeapNode* minHeapNode = extractMin(minHeap);
+		struct MinHeapNode* minHeapNode = ExtractMin(minHeap);
 		int u = minHeapNode->v; // Store the extracted vertex number 
 
 		// Traverse through all adjacent vertices of u (the extracted 
@@ -380,28 +355,19 @@ void dijkstra_output(struct Graph* graph, int src, FILE *fp)
 
 			// If shortest distance to v is not finalized yet, and distance to v 
 			// through u is less than its previously calculated distance 
-			if (isInMinHeap(minHeap, v) && dist[u] != INT_MAX && pCrawl->weight + dist[u] < dist[v])
+			if (IsInMinHeap(minHeap, v) && dist[u] != INT_MAX && pCrawl->weight + dist[u] < dist[v])
 			{
 				dist[v] = dist[u] + pCrawl->weight;
 
-				// update distance value in min heap also 
-				decreaseKey(minHeap, v, dist[v]);
+				// Update distance value in min heap also 
+				DecreaseKey(minHeap, v, dist[v]);
 			}
 			pCrawl = pCrawl->next;
 		}
-		//Delete_AdjListNode(pCrawl);
 		free(minHeapNode);
 	}
-	// print the calculated shortest distances 
-	printArr_to_File(dist, V, fp);
-	
-	//for (int i = 0; i < V; ++i)
-	//{
-	//	dist[i] = NULL;
-	//	minHeap->pos[i] = NULL;
-	//	minHeap->array[i] = NULL;
-	//}
-	//free(minHeap->array[src]);
+	// print the calculated shortest distances into output file
+	PrintArrToFile(dist, V, fp, list);
 
 	free(minHeap->array);
 	free(minHeap->pos);
@@ -409,7 +375,7 @@ void dijkstra_output(struct Graph* graph, int src, FILE *fp)
 }
 
 // A utility function to create a new Min Heap Node 
-struct MinHeapNode* newMinHeapNode(int v, int dist)
+struct MinHeapNode* NewMinHeapNode(int v, int dist)
 {
 	struct MinHeapNode* minHeapNode = (struct MinHeapNode*) malloc(sizeof(struct MinHeapNode));
 	minHeapNode->v = v;
@@ -418,19 +384,20 @@ struct MinHeapNode* newMinHeapNode(int v, int dist)
 }
 
 // A utility function to swap two nodes of min heap. Needed for min heapify 
-void swapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b)
+void SwapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b)
 {
 	struct MinHeapNode* t = *a;
 	*a = *b;
 	*b = t;
 }
 
-bool Finding_Duplicate_Distances(text city_1, text city_2, struct edge *head)
+// A utility function to check if there is already distance like this in a list
+bool FindingDuplicateDistances(Text city_1, Text city_2, struct Edge *head)
 {
 	if (head == NULL)
 		return true;
 
-	struct edge * current_node = head;
+	struct Edge * current_node = head;
 
 	while (current_node != NULL)
 	{
@@ -442,12 +409,13 @@ bool Finding_Duplicate_Distances(text city_1, text city_2, struct edge *head)
 	return true;
 }
 
-bool Finding_Duplicate_Cities(text city_1, struct vertex *head)
+// A utility function to check if there is already city like this in a list
+bool FindingDuplicateCities(Text city_1, struct Vertex *head)
 {
 	if (head == NULL)
 		return true;
 
-	struct vertex * current_node = head;
+	struct Vertex * current_node = head;
 
 	while (current_node != NULL)
 	{
@@ -458,11 +426,12 @@ bool Finding_Duplicate_Cities(text city_1, struct vertex *head)
 	return true;
 }
 
-struct edge * Add_New_Distance(text city_1, text city_2, int dist, struct edge *head)
+// A utility function to create a new distance 
+struct Edge * AddNewDistance(Text city_1, Text city_2, int dist, struct Edge *head)
 {
 	if (head == NULL)
 	{
-		head = (struct edge *)malloc(sizeof(struct edge));
+		head = (struct Edge *)malloc(sizeof(struct Edge));
 		head->city1 = (char*)malloc(20);
 		head->city2 = (char*)malloc(20);
 		strcpy(head->city1, city_1);
@@ -472,12 +441,12 @@ struct edge * Add_New_Distance(text city_1, text city_2, int dist, struct edge *
 		return head;
 	}
 
-	struct edge *current_node = head;
+	struct Edge *current_node = head;
 
 	while (current_node->next != NULL)
 		current_node = current_node->next;
 
-	current_node->next = (struct edge *)malloc(sizeof(struct edge));
+	current_node->next = (struct Edge *)malloc(sizeof(struct Edge));
 	current_node->next->city1 = (char*)malloc(20);
 	current_node->next->city2 = (char*)malloc(20);
 	strcpy(current_node->next->city1, city_1);	
@@ -487,11 +456,12 @@ struct edge * Add_New_Distance(text city_1, text city_2, int dist, struct edge *
 	return head;
 }
 
-struct vertex* Add_New_City(text city_1, int c, struct vertex *head)
+// A utility function to create a new city
+struct Vertex* AddNewCity(Text city_1, int c, struct Vertex *head)
 {
 	if (head == NULL)
 	{
-		head = (struct vertex *)malloc(sizeof(struct vertex));
+		head = (struct Vertex *)malloc(sizeof(struct Vertex));
 		head->city = (char*)malloc(20);
 		strcpy(head->city, city_1);
 		head->counter = c;
@@ -499,12 +469,12 @@ struct vertex* Add_New_City(text city_1, int c, struct vertex *head)
 		return head;
 	}
 
-	struct vertex *current_node = head;
+	struct Vertex *current_node = head;
 	
 	while (current_node->next != NULL)
 		current_node = current_node->next;
 
-	current_node->next = (struct vertex *)malloc(sizeof(struct vertex));
+	current_node->next = (struct Vertex *)malloc(sizeof(struct Vertex));
 	current_node->next->city = (char*)malloc(20);
 	strcpy(current_node->next->city, city_1);
 	current_node->next->counter = c;

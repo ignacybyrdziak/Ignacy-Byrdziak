@@ -8,7 +8,8 @@
 #include <stdbool.h>
 #include <math.h>
 
-typedef char* text;
+// A type definition to fasten char* into "string" in type of 'Text'
+typedef char* Text;
 
 // A structure to represent a node in adjacency list 
 struct AdjListNode
@@ -47,20 +48,20 @@ struct MinHeap
 	int *pos;     // This is needed for decreaseKey() 
 	struct MinHeapNode **array;
 };
-
-struct edge
+// Structure to represent an edge -> distance
+struct Edge
 {
-	text city1;
-	text city2;
-	int distance;
-	struct edge *next;
+	Text city1;		// Name of the first city
+	Text city2;		//Name of the second city
+	int distance;	// Distance between cities
+	struct Edge *next;
 }; 
-
-struct vertex
+// Structure to represent a vertex -> city
+struct Vertex
 {
-	int counter;
-	text city;
-	struct vertex *next;
+	int counter;	// Position/Index of a node in city list
+	Text city;		// Name of a city
+	struct Vertex *next;
 };
 
 #endif

@@ -10,56 +10,54 @@
 
 #include "structures.h"
 
-int Finding_City_Position_From_A_List(text city_to_find, struct vertex *head);
+int FindingCityPositionFromAList(Text city_to_find, struct Vertex *head);
 
-void Printing_City_On_Called_Position(int position, struct vertex *head);
+Text FindingCityNameFromAList(int position, struct Vertex *head);
 
-void Printing_Distance_On_Called_Position(int position, struct edge *head);
+struct AdjListNode* NewAdjListNode(int dest, int weight);
 
-struct AdjListNode* newAdjListNode(int dest, int weight);
+struct Graph* CreateGraph(int V);
 
-struct Graph* createGraph(int V);
+void AddEdge(struct Graph* graph, int src, int dest, int weight);
 
-void addEdge(struct Graph* graph, int src, int dest, int weight);
+void MinHeapify(struct MinHeap* minHeap, int idx);
 
-void minHeapify(struct MinHeap* minHeap, int idx);
+int IsEmpty(struct MinHeap* minHeap);
 
-int isEmpty(struct MinHeap* minHeap);
+struct MinHeapNode* ExtractMin(struct MinHeap* minHeap);
 
-struct MinHeapNode* extractMin(struct MinHeap* minHeap);
+void DecreaseKey(struct MinHeap* minHeap, int v, int dist);
 
-void decreaseKey(struct MinHeap* minHeap, int v, int dist);
+bool IsInMinHeap(struct MinHeap *minHeap, int v);
 
-bool isInMinHeap(struct MinHeap *minHeap, int v);
+void PrintArr(int dist[], int n, struct Vertex *list);
 
-void printArr(int dist[], int n);
+void PrintArrToFile(int dist[], int n, FILE *fp, struct Vertex *list);
 
-void printArr_to_File(int dist[], int n, FILE *fp);
+void Dijkstra(struct Graph* graph, int src, struct Vertex *list);
 
-void dijkstra(struct Graph* graph, int src);
+void DijkstraOutput(struct Graph* graph, int src, FILE *fp, struct Vertex *list);
 
-void dijkstra_output(struct Graph* graph, int src, FILE *fp);
+struct MinHeapNode* NewMinHeapNode(int v, int dist);
 
-struct MinHeapNode* newMinHeapNode(int v, int dist);
+void SwapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b);
 
-void swapMinHeapNode(struct MinHeapNode** a, struct MinHeapNode** b);
+bool FindingDuplicateDistances(Text city_1, Text city_2, struct Edge *head);
 
-bool Finding_Duplicate_Distances(text city_1, text city_2, struct edge *head);
+bool FindingDuplicateCities(Text city_1, struct Vertex *head);
 
-bool Finding_Duplicate_Cities(text city_1, struct vertex *head);
+struct Edge* AddNewDistance(Text city_1, Text city_2, int dist, struct Edge *head);
 
-struct edge * Add_New_Distance(text city_1, text city_2, int dist, struct edge *head);
+struct Vertex* AddNewCity(Text city_1, int counter, struct Vertex *head);
 
-struct vertex* Add_New_City(text city_1, int counter, struct vertex *head);
+void DeleteAdjListNode(struct AdjListNode* pHead);
 
-void Delete_AdjListNode(struct AdjListNode* pHead);
+void DeleteAdjList(struct AdjList* pHead);
 
-void Delete_AdjList(struct AdjList* pHead);
+void DeleteGraph(struct Graph* pHead);
 
-void Delete_Graph(struct Graph* pHead);
+void DeleteCity(struct Vertex* phead);
 
-void Delete_City(struct vertex* phead);
-
-void Delete_Distance(struct edge* pHead);
+void DeleteDistance(struct Edge* pHead);
 
 #endif

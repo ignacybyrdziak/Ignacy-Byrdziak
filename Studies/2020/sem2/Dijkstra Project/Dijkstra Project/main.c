@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <limits.h> 
 #include <cstdbool>
 #include <string.h>
@@ -9,154 +8,158 @@
 
 int main(int argc, char *argv[])
 {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);	//Memory leak searching
 
 	printf("The program has got default parameters \n-i citiesInput.txt -o citiesOutpit2.txt -p -h \nbut you can change them in Project->Properties->Debugging or \nerase them and input parameters some other way, for exaple through the console\n");
 
-	text input_file, output_file;
-	int cities_position = 0, distance_position = 0, mod_counter = 1, character_counter = 0, space_counter;
-	struct edge *list_of_distances = NULL;
-	struct vertex *list_of_cities = NULL;
-	FILE * pFile, *fp;
-	char buf[1024], c[20];
-	struct edge* tmp = (struct edge *)malloc(sizeof(struct edge));
+	Text inputFile, outputFile;		//Input and output files
+	int citiesPostition = 0, distancePosition = 0, columnCounter = 1, characterCounter = 0, whiteMarkCounter;	//Counters to move through input file and count cities and distances
+	struct Edge *listOfDistances = NULL;	//Here the list of distances will be storaged
+	struct Vertex *listOfCities = NULL;	//Here the list of cities will be storaged
+	FILE * pFile, *fp;		//Here we storage our stream
+	char buf[1024], character[20];	//Buffer to read from input file and bufer for city names
+	struct Edge* tmp = (struct Edge *)malloc(sizeof(struct Edge));	//Temporary node to storage cities to later add them to distance
 	tmp->city1 = (char*)malloc(20);
 	tmp->city2 = (char*)malloc(20);
-	text starting_city[1024];
+	Text startingCity[1024];	//City given by user, wchich we will find shortest ways to
 
+	//Empyting bufer for city name
 	for (int n = 0; n < 20; n++)
-		c[n] = NULL;
+		character[n] = NULL;
 
+	//Main loop to read parameters given by user
 	for (int i = 1; i < argc-1; i++)
 	{
-		if (strcmp(argv[i], "-i") == 0)
+		if (strcmp(argv[i], "-i") == 0)	//Argument -i
 		{
-			input_file = argv[i+1];
-			fp = fopen_s(&pFile, input_file, "r");
-			if (pFile==NULL)
+			inputFile = argv[i+1];
+			fp = fopen_s(&pFile, inputFile, "r");	//Opening input file for reading it
+			if (pFile==NULL)	//If file is empty, we are closing it
 			{
 				fclose(pFile);
 				printf("File empty");
 			}
 			else
 			{
-				while (fgets(buf,1024,pFile) >= 1024)
+				while (fgets(buf,1024,pFile) >= 1024)	//Reading from file in a bufer size pieces
 				{
-					mod_counter = 1;
-					space_counter = 0;
+					columnCounter = 1;
+					whiteMarkCounter = 0;
 					for (int m = 0; m < 1024; m++)
 					{
-						if (buf[m] == ' ' || buf[m] == '\n' || buf[m] == '\t')
+						if (buf[m] == ' ' || buf[m] == '\n' || buf[m] == '\t')	//If white mark is found
 						{
-							if (mod_counter % 3 == 0)
+							if (columnCounter % 3 == 0)
 							{
-								if (Finding_Duplicate_Distances(tmp->city1, tmp->city2, list_of_distances))
+								if (FindingDuplicateDistances(tmp->city1, tmp->city2, listOfDistances))	//Searching if there is already distance like that in a list
 								{
-									list_of_distances = Add_New_Distance(tmp->city1, tmp->city2, atoi(c), list_of_distances);
-								//	Printing_Distance_On_Called_Position(distance_position, list_of_distances);
-									distance_position++;
+									listOfDistances = AddNewDistance(tmp->city1, tmp->city2, atoi(character), listOfDistances); //Adding new distance
+									distancePosition++;
 								}
 							}
-							character_counter = 0;
-							space_counter++;
-							if (space_counter == 3)
+							characterCounter = 0;
+							whiteMarkCounter++;
+							if (whiteMarkCounter == 3)	//End of line in file
 							{
 								break;
 							}
 
-							if (mod_counter % 3 == 1)
+							if (columnCounter % 3 == 1)
 							{
-								if (Finding_Duplicate_Cities(c, list_of_cities))
+								if (FindingDuplicateCities(character, listOfCities)) //Searching if there is already city like that in a list
 								{
-									list_of_cities = Add_New_City(c, cities_position, list_of_cities);
-								//	Printing_City_On_Called_Position(cities_position, list_of_cities);
-									cities_position++;
+									listOfCities = AddNewCity(character, citiesPostition, listOfCities); //Adding new city
+									citiesPostition++;
 								}
-								strcpy_s(tmp->city1, 20, c);
+								strcpy_s(tmp->city1, 20, character);
 							}
-							if (mod_counter % 3 == 2)
+							if (columnCounter % 3 == 2)
 							{
-								if (Finding_Duplicate_Cities(c, list_of_cities))
+								if (FindingDuplicateCities(character, listOfCities)) //Searching if there is already city like that in a list
 								{
-									list_of_cities = Add_New_City(c, cities_position, list_of_cities);
-								//	Printing_City_On_Called_Position(cities_position, list_of_cities);
-									cities_position++;
+									listOfCities = AddNewCity(character, citiesPostition, listOfCities);	//Adding new city
+									citiesPostition++;
 								}
-								strcpy_s(tmp->city2, 20, c);
+								strcpy_s(tmp->city2, 20, character);
 							}
-							mod_counter++;
+							columnCounter++;
 
-							for (int n = 0; n < 20; n++)
-								c[n] = NULL;
+							for (int n = 0; n < 20; n++)	//Emptying the character bufer
+								character[n] = NULL;
 						}
 						else
 						{
-							c[character_counter] = buf[m];
-							character_counter++;
+							character[characterCounter] = buf[m];	//Reading from bufer character by character
+							characterCounter++;
 						}
 					}
 				}
 			}
-			fclose(pFile);
+			fclose(pFile);	//Closing the file
 			i++;
 			printf("\n");
 		}
-		else if (strcmp(argv[i], "-o") == 0)
+		else if (strcmp(argv[i], "-o") == 0)	//Argument -o
 		{
-			output_file = argv[i+1];
+			outputFile = argv[i+1]; //Reading the output file name
 
-			struct Graph* graph = createGraph(cities_position);
-			struct edge *current_node = list_of_distances;
+			struct Graph* graph = CreateGraph(citiesPostition);		//Creating the graph with number of nodes equal to citiesPosition counter
+			struct Edge *currentNode = listOfDistances;		//Tempporary node to move through list
 
-			while (current_node)
-			{
-				addEdge(graph, Finding_City_Position_From_A_List(current_node->city1, list_of_cities), Finding_City_Position_From_A_List(current_node->city2, list_of_cities), current_node->distance);
-				current_node = current_node->next;
+			while (currentNode)
+			{	//Adding the edges to the graph
+				AddEdge(graph, FindingCityPositionFromAList(currentNode->city1, listOfCities), FindingCityPositionFromAList(currentNode->city2, listOfCities), currentNode->distance);
+				currentNode = currentNode->next;
 			}
 				
-			fp = fopen_s(&pFile, output_file, "w");
+			fp = fopen_s(&pFile, outputFile, "w");	//Opening output file to write in it
 			printf("Which city from the file, do you want to see distances too?\n");
-			scanf_s("%s" ,starting_city, 20);
+			scanf_s("%s" ,startingCity, 20);	//Reading the starting city
 
-			dijkstra_output(graph, Finding_City_Position_From_A_List(starting_city, list_of_cities) , pFile);
+			//The Dijkstra shortest path algorithm
+			DijkstraOutput(graph, FindingCityPositionFromAList(startingCity, listOfCities) , pFile, listOfCities);
 
+			//Closing and freeing the file
 			fclose(pFile);
 			free(pFile);
 
-			Delete_Graph(graph);
+			//Freeing the graph
+			DeleteGraph(graph);
 
 			i++;
 			printf("\n");
 		}
-		else if (strcmp(argv[i], "-p") == 0)
+		else if (strcmp(argv[i], "-p") == 0) //Argument -p
 		{
-			struct Graph* graph = createGraph(cities_position);
-			struct edge *current_node = list_of_distances;
+		struct Graph* graph = CreateGraph(citiesPostition);		//Creating the graph with number of nodes equal to citiesPosition counter
+		struct Edge *currentNode = listOfDistances;		//Tempporary node to move through list
 
-			while (current_node)
-			{
-				addEdge(graph, Finding_City_Position_From_A_List(current_node->city1, list_of_cities), Finding_City_Position_From_A_List(current_node->city2, list_of_cities), current_node->distance);
-				current_node = current_node->next;
-			}
-
-			printf("Which city from the file, do you want to see distances too?\n");
-			scanf_s("%s", starting_city, 20);
-
-			dijkstra(graph, Finding_City_Position_From_A_List(starting_city, list_of_cities));
-
-			Delete_Graph(graph);
-
-			i++;
-			printf("\n");
+		while (currentNode)
+		{	//Adding the edges to the graph
+			AddEdge(graph, FindingCityPositionFromAList(currentNode->city1, listOfCities), FindingCityPositionFromAList(currentNode->city2, listOfCities), currentNode->distance);
+			currentNode = currentNode->next;
 		}
-		else if (strcmp(argv[i], "-h") == 0)
-		{
+
+		printf("Which city from the file, do you want to see distances too?\n");
+		scanf_s("%s", startingCity, 20);	//Reading the starting city
+
+		//The Dijkstra shortest path algorithm
+		Dijkstra(graph, FindingCityPositionFromAList(startingCity, listOfCities), listOfCities);
+
+		//Freeing the graph
+		DeleteGraph(graph);
+
+		i++;
+		printf("\n");
+		}
+		else if (strcmp(argv[i], "-h") == 0) //Arumeng -h
+		{	//Quick help panel
 			printf("Help Panel:\nPlease use parameters from list below:\n -i if you want to read from choosen file\n -o if you want to save data to choosen file\n -p if you want to print data to console\n\n");
 			i++;
 			printf("\n");
 		}
-		else
-		{
+		else	//Default option, if no arugment has been called, or they had beed introduced wrong way
+		{	//Quick help panel
 			printf("Help Panel:\nPlease use parameters from list below:\n -i if you want to read from choosen file\n -o if you want to save data to choosen file\n -p if you want to print data to console\n\n");
 			printf("\n");
 		}
@@ -164,9 +167,11 @@ int main(int argc, char *argv[])
 	}
 	printf("\n");
 
-	Delete_City(list_of_cities);
-	Delete_Distance(list_of_distances);
+	//Freeing the lists of cities and distances
+	DeleteCity(listOfCities);
+	DeleteDistance(listOfDistances);
 
+	//Freeing tempotaty node
 	free(tmp->city1);
 	free(tmp->city2);
 	free(tmp);

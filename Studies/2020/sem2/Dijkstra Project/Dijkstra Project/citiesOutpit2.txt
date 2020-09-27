@@ -1,10 +1,10 @@
 City:   Distance from source city:
-0 		 0
-1 		 4
-2 		 8
-3 		 12
-4 		 19
-5 		 14
-6 		 11
-7 		 21
-8 		 9
+Andrychow 		 0
+Bielsko 		 4
+Halcnow 		 8
+Cieszyn 		 12
+Dobczyce 		 19
+Ilownica 		 14
+Frankfurt 		 11
+Elk 		 21
+Gniezno 		 9
