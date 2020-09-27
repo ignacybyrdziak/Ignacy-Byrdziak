@@ -10,26 +10,8 @@
 
 #include "structures.h"
 
-//Zbiory * Assinging_Value_To_A_Zbior(bool p, int position, Zbiory*head);
-//
-//slistEL * Assinging_Value_To_A_Graf(slistEL *pw, int position, slistEL *head);
-//
-//bool * Is_There_A_Node(int position, slistEL *head);
-//
 int Finding_City_Position_From_A_List(text city_to_find, struct vertex *head);
-//
-//bool Finding_Value_From_Zbior(int position, Zbiory *head);
-//
-//slistEL *Finding_Value_From_A_Graf(int position, slistEL *head);
-//
-//slistEL *Add_New_Element_To_Graf(slistEL *head, slistEL *pw);
-//
-//Zbiory *Add_New_Element_To_Q(Zbiory *head);
-//
-//Zwykla *Add_New_Element_To_A_List(int val, Zwykla *head);
-//
-//Zwykla *Assinging_Value_To_A_List(int val, int position, Zwykla *head);
-//
+
 void Printing_City_On_Called_Position(int position, struct vertex *head);
 
 void Printing_Distance_On_Called_Position(int position, struct edge *head);
@@ -72,13 +54,9 @@ struct vertex* Add_New_City(text city_1, int counter, struct vertex *head);
 
 void Delete_AdjListNode(struct AdjListNode* pHead);
 
-void Delete_Tmp(struct edge** pHead);
-
 void Delete_AdjList(struct AdjList* pHead);
 
 void Delete_Graph(struct Graph* pHead);
-
-void Delete_MinHeap(struct MinHeap** pHead);
 
 void Delete_City(struct vertex* phead);
 

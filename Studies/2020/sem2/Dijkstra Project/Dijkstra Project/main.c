@@ -11,20 +11,20 @@ int main(int argc, char *argv[])
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	printf("\n");
+	printf("The program has got default parameters \n-i citiesInput.txt -o citiesOutpit2.txt -p -h \nbut you can change them in Project->Properties->Debugging or \nerase them and input parameters some other way, for exaple through the console\n");
 
 	text input_file, output_file;
 	int cities_position = 0, distance_position = 0, mod_counter = 1, character_counter = 0, space_counter;
 	struct edge *list_of_distances = NULL;
 	struct vertex *list_of_cities = NULL;
 	FILE * pFile, *fp;
-	char buf[1024], c[10];
+	char buf[1024], c[20];
 	struct edge* tmp = (struct edge *)malloc(sizeof(struct edge));
-	tmp->city1 = (char*)malloc(10);
-	tmp->city2 = (char*)malloc(10);
-	text starting_city;
+	tmp->city1 = (char*)malloc(20);
+	tmp->city2 = (char*)malloc(20);
+	text starting_city[1024];
 
-	for (int n = 0; n < 10; n++)
+	for (int n = 0; n < 20; n++)
 		c[n] = NULL;
 
 	for (int i = 1; i < argc-1; i++)
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 								//	Printing_City_On_Called_Position(cities_position, list_of_cities);
 									cities_position++;
 								}
-								strcpy_s(tmp->city1, 10, c);
+								strcpy_s(tmp->city1, 20, c);
 							}
 							if (mod_counter % 3 == 2)
 							{
@@ -82,11 +82,11 @@ int main(int argc, char *argv[])
 								//	Printing_City_On_Called_Position(cities_position, list_of_cities);
 									cities_position++;
 								}
-								strcpy_s(tmp->city2, 10, c);
+								strcpy_s(tmp->city2, 20, c);
 							}
 							mod_counter++;
 
-							for (int n = 0; n < 10; n++)
+							for (int n = 0; n < 20; n++)
 								c[n] = NULL;
 						}
 						else
@@ -97,7 +97,6 @@ int main(int argc, char *argv[])
 					}
 				}
 			}
-
 			fclose(pFile);
 			i++;
 			printf("\n");
@@ -111,43 +110,45 @@ int main(int argc, char *argv[])
 
 			while (current_node)
 			{
-				//addEdge(graph, Finding_City_Position_From_A_List(current_node->city1, list_of_cities), Finding_City_Position_From_A_List(current_node->city2, list_of_cities), current_node->distance);
+				addEdge(graph, Finding_City_Position_From_A_List(current_node->city1, list_of_cities), Finding_City_Position_From_A_List(current_node->city2, list_of_cities), current_node->distance);
 				current_node = current_node->next;
 			}
 				
 			fp = fopen_s(&pFile, output_file, "w");
-			printf("Which city do you want to see distances too?\n");
-			//scanf_s("%s", starting_city);
-
-			//podawanie node'a zrobiæ
+			printf("Which city from the file, do you want to see distances too?\n");
+			scanf_s("%s" ,starting_city, 20);
 
 			dijkstra_output(graph, Finding_City_Position_From_A_List(starting_city, list_of_cities) , pFile);
 
 			fclose(pFile);
+			free(pFile);
 
 			Delete_Graph(graph);
 
 			i++;
 			printf("\n");
 		}
-		//else if (strcmp(argv[i], "-p") == 0)
-		//{
-		//	struct Graph* graph = createGraph(cities_position);
-		//	struct edge *current_node = list_of_distances;
+		else if (strcmp(argv[i], "-p") == 0)
+		{
+			struct Graph* graph = createGraph(cities_position);
+			struct edge *current_node = list_of_distances;
 
-		//	while (current_node)
-		//	{
-		//		//addEdge(graph, Finding_City_Position_From_A_List(current_node->city1, list_of_cities), Finding_City_Position_From_A_List(current_node->city2, list_of_cities), current_node->distance);
-		//		current_node = current_node->next;
-		//	}
+			while (current_node)
+			{
+				addEdge(graph, Finding_City_Position_From_A_List(current_node->city1, list_of_cities), Finding_City_Position_From_A_List(current_node->city2, list_of_cities), current_node->distance);
+				current_node = current_node->next;
+			}
 
-		//	dijkstra(graph, 0);
+			printf("Which city from the file, do you want to see distances too?\n");
+			scanf_s("%s", starting_city, 20);
 
-		//	Delete_Graph(graph);
+			dijkstra(graph, Finding_City_Position_From_A_List(starting_city, list_of_cities));
 
-		//	i++;
-		//	printf("\n");
-		//}
+			Delete_Graph(graph);
+
+			i++;
+			printf("\n");
+		}
 		else if (strcmp(argv[i], "-h") == 0)
 		{
 			printf("Help Panel:\nPlease use parameters from list below:\n -i if you want to read from choosen file\n -o if you want to save data to choosen file\n -p if you want to print data to console\n\n");
@@ -161,26 +162,10 @@ int main(int argc, char *argv[])
 		}
 
 	}
-
 	printf("\n");
 
-	
-	//free(graph);
-
 	Delete_City(list_of_cities);
-
 	Delete_Distance(list_of_distances);
-
-	//free(list_of_cities->city);
-	//free(list_of_cities);
-
-	//Delete_AdjListNode(pHead);
-
-	//Delete_AdjList(pHead);
-
-	//Delete_Graph(pHead);
-
-	//Delete_MinHeap(pHead);
 
 	free(tmp->city1);
 	free(tmp->city2);
