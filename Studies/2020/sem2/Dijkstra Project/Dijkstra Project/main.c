@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	tmp->city2 = (char*)malloc(20);
 	Text startingCity[1024];	//City given by user, wchich we will find shortest ways to
 
-	//Empyting bufer for city name
+	//Empyting buffer for city name
 	for (int n = 0; n < 20; n++)
 		character[n] = NULL;
 
