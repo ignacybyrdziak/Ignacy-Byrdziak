@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
 
 			while (currentNode)
 			{	//Adding the edges to the graph
-				AddEdge(graph, FindingCityPositionFromAList(currentNode->city1, listOfCities), FindingCityPositionFromAList(currentNode->city2, listOfCities), currentNode->distance);
+				AddEdgeToGraph(graph, FindingCityPositionFromAList(currentNode->city1, listOfCities), FindingCityPositionFromAList(currentNode->city2, listOfCities), currentNode->distance);
 				currentNode = currentNode->next;
 			}
 				
@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
 
 		while (currentNode)
 		{	//Adding the edges to the graph
-			AddEdge(graph, FindingCityPositionFromAList(currentNode->city1, listOfCities), FindingCityPositionFromAList(currentNode->city2, listOfCities), currentNode->distance);
+			AddEdgeToGraph(graph, FindingCityPositionFromAList(currentNode->city1, listOfCities), FindingCityPositionFromAList(currentNode->city2, listOfCities), currentNode->distance);
 			currentNode = currentNode->next;
 		}
 
