@@ -1,0 +1,479 @@
+\hypertarget{functions_8c}{}\section{functions.\+c File Reference}
+\label{functions_8c}\index{functions.c@{functions.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}functions.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{functions_8c_ac3b55fdb76221489bc402d715d4c5d5a}{Delete\+Adj\+List\+Node}} (struct \mbox{\hyperlink{struct_adj_list_node}{Adj\+List\+Node}} $\ast$p\+Head)
+\item 
+void \mbox{\hyperlink{functions_8c_a49e00c3da654ef178af2c5fe78a835f3}{Delete\+Adj\+List}} (struct \mbox{\hyperlink{struct_adj_list}{Adj\+List}} $\ast$p\+Head)
+\item 
+void \mbox{\hyperlink{functions_8c_a1000386bea28026be911951e478935bb}{Delete\+Graph}} (struct \mbox{\hyperlink{struct_graph}{Graph}} $\ast$p\+Head)
+\item 
+void \mbox{\hyperlink{functions_8c_a022608548102a0855a6e94b14244f0b9}{Delete\+Distance}} (struct \mbox{\hyperlink{struct_edge}{Edge}} $\ast$p\+Head)
+\item 
+void \mbox{\hyperlink{functions_8c_adf38b891337a3f8192259528b55f3975}{Delete\+City}} (struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$p\+Head)
+\item 
+struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}} $\ast$ \mbox{\hyperlink{functions_8c_a7f3aa36c21fb80494508da24d1256fe0}{create\+Min\+Heap}} (int capacity)
+\item 
+struct \mbox{\hyperlink{struct_min_heap_node}{Min\+Heap\+Node}} $\ast$ \mbox{\hyperlink{functions_8c_a8b47eadf72fa999972a3aed5ff83f4b6}{New\+Min\+Heap\+Node}} (int v, int dist)
+\item 
+struct \mbox{\hyperlink{struct_adj_list_node}{Adj\+List\+Node}} $\ast$ \mbox{\hyperlink{functions_8c_a48c4e1c652deaefa908db79a7f330662}{New\+Adj\+List\+Node}} (int dest, int weight)
+\item 
+struct \mbox{\hyperlink{struct_edge}{Edge}} $\ast$ \mbox{\hyperlink{functions_8c_a65d52300f7ba90c4f1b4bbdff7c28110}{Add\+New\+Distance}} (\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}} city\+\_\+1, \mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}} city\+\_\+2, int dist, struct \mbox{\hyperlink{struct_edge}{Edge}} $\ast$head)
+\item 
+struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$ \mbox{\hyperlink{functions_8c_a2c4e80fa2a6f5b0d534006ca3dcee8ae}{Add\+New\+City}} (\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}} city\+\_\+1, int c, struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$head)
+\item 
+struct \mbox{\hyperlink{struct_graph}{Graph}} $\ast$ \mbox{\hyperlink{functions_8c_aba36b48ffa4844642467aa910de5ab48}{Create\+Graph}} (int V)
+\item 
+void \mbox{\hyperlink{functions_8c_a185d3db77e066640a00c6e265cd21a96}{Add\+Edge\+To\+Graph}} (struct \mbox{\hyperlink{struct_graph}{Graph}} $\ast$graph, int src, int dest, int weight)
+\item 
+int \mbox{\hyperlink{functions_8c_a0d2d3ab38f8d6a097fd48707ee6bd347}{Finding\+City\+Position\+From\+A\+List}} (\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}} city\+\_\+to\+\_\+find, struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$head)
+\item 
+\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}} \mbox{\hyperlink{functions_8c_a224342491d149d4b07e9538ffcde5406}{Finding\+City\+Name\+From\+A\+List}} (int position, struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$head)
+\item 
+bool \mbox{\hyperlink{functions_8c_a4e8d16914498e9826c03c103493c80a1}{Finding\+Duplicate\+Distances}} (\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}} city\+\_\+1, \mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}} city\+\_\+2, struct \mbox{\hyperlink{struct_edge}{Edge}} $\ast$head)
+\item 
+bool \mbox{\hyperlink{functions_8c_a8d2e86f32ddc5ffcab6520dc632a9ec1}{Finding\+Duplicate\+Cities}} (\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}} city\+\_\+1, struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$head)
+\item 
+bool \mbox{\hyperlink{functions_8c_a111124d087196a70ae72c56db497f9ec}{Is\+In\+Min\+Heap}} (struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}} $\ast$min\+Heap, int v)
+\item 
+int \mbox{\hyperlink{functions_8c_aaa584a9825180d669ab306776b848119}{Is\+Empty}} (struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}} $\ast$min\+Heap)
+\item 
+void \mbox{\hyperlink{functions_8c_a12ecdcf50f7ad336684686268000b10c}{Min\+Heapify}} (struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}} $\ast$min\+Heap, int idx)
+\item 
+struct \mbox{\hyperlink{struct_min_heap_node}{Min\+Heap\+Node}} $\ast$ \mbox{\hyperlink{functions_8c_a101f97428a1216797c3fdd5e90dc6f30}{Extract\+Min}} (struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}} $\ast$min\+Heap)
+\item 
+void \mbox{\hyperlink{functions_8c_a207239dd43e942248b0e071a03badd7c}{Decrease\+Key}} (struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}} $\ast$min\+Heap, int v, int dist)
+\item 
+void \mbox{\hyperlink{functions_8c_a1c9ab97cb966c6d64d2db4e8a60038bd}{Swap\+Min\+Heap\+Node}} (struct \mbox{\hyperlink{struct_min_heap_node}{Min\+Heap\+Node}} $\ast$$\ast$a, struct \mbox{\hyperlink{struct_min_heap_node}{Min\+Heap\+Node}} $\ast$$\ast$b)
+\item 
+void \mbox{\hyperlink{functions_8c_a5e269742ddd6a1148ba57ef09ea2554f}{Print\+Arr}} (int dist\mbox{[}$\,$\mbox{]}, int n, struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$list)
+\item 
+void \mbox{\hyperlink{functions_8c_a9e15d2bdceb4213dd1a69eff38f1025a}{Print\+Arr\+To\+File}} (int dist\mbox{[}$\,$\mbox{]}, int n, F\+I\+LE $\ast$fp, struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$list)
+\item 
+void \mbox{\hyperlink{functions_8c_afa8c732781608f5d31fe043b95a81341}{Dijkstra}} (struct \mbox{\hyperlink{struct_graph}{Graph}} $\ast$graph, int src, struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$list)
+\item 
+void \mbox{\hyperlink{functions_8c_a544a83138eea678e4f8169e89adcfa9e}{Dijkstra\+Output}} (struct \mbox{\hyperlink{struct_graph}{Graph}} $\ast$graph, int src, F\+I\+LE $\ast$fp, struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$list)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{functions_8c_a185d3db77e066640a00c6e265cd21a96}\label{functions_8c_a185d3db77e066640a00c6e265cd21a96}} 
+\index{functions.c@{functions.c}!AddEdgeToGraph@{AddEdgeToGraph}}
+\index{AddEdgeToGraph@{AddEdgeToGraph}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{AddEdgeToGraph()}{AddEdgeToGraph()}}
+{\footnotesize\ttfamily void Add\+Edge\+To\+Graph (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_graph}{Graph}} $\ast$}]{graph,  }\item[{int}]{src,  }\item[{int}]{dest,  }\item[{int}]{weight }\end{DoxyParamCaption})}
+
+Adds an edge to an undirected graph 
+\begin{DoxyParams}{Parameters}
+{\em graph} & head pointer to first list element (head) \\
+\hline
+{\em src} & is the source vertex for new edge \\
+\hline
+{\em src} & is the desination vertex for new edge \\
+\hline
+{\em weight} & is the weight between two vertexes \\
+\hline
+\end{DoxyParams}
+Add an edge from src to dest. A new node is added to the adjacency list of src. The node is added at the beginning
+
+Since graph is undirected, add an edge from dest to src also \mbox{\Hypertarget{functions_8c_a2c4e80fa2a6f5b0d534006ca3dcee8ae}\label{functions_8c_a2c4e80fa2a6f5b0d534006ca3dcee8ae}} 
+\index{functions.c@{functions.c}!AddNewCity@{AddNewCity}}
+\index{AddNewCity@{AddNewCity}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{AddNewCity()}{AddNewCity()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_vertex}{Vertex}}$\ast$ Add\+New\+City (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}}}]{city\+One,  }\item[{int}]{counter,  }\item[{struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$}]{head }\end{DoxyParamCaption})}
+
+A utility function to create a new vertex (city) in a graph 
+\begin{DoxyParams}{Parameters}
+{\em city\+One} & is the city given to new vertex \\
+\hline
+{\em counter} & is position of the city in a list \\
+\hline
+{\em head} & pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a65d52300f7ba90c4f1b4bbdff7c28110}\label{functions_8c_a65d52300f7ba90c4f1b4bbdff7c28110}} 
+\index{functions.c@{functions.c}!AddNewDistance@{AddNewDistance}}
+\index{AddNewDistance@{AddNewDistance}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{AddNewDistance()}{AddNewDistance()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_edge}{Edge}}$\ast$ Add\+New\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}}}]{city\+One,  }\item[{\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}}}]{city\+Two,  }\item[{int}]{dist,  }\item[{struct \mbox{\hyperlink{struct_edge}{Edge}} $\ast$}]{head }\end{DoxyParamCaption})}
+
+A utility function to create a new edge (distance) in the graph 
+\begin{DoxyParams}{Parameters}
+{\em city\+One} & is the first city given to new edge (distance) \\
+\hline
+{\em city\+Two} & is the second city given to new edge (distance) \\
+\hline
+{\em dist} & is the distance between those two cities \\
+\hline
+{\em head} & pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_aba36b48ffa4844642467aa910de5ab48}\label{functions_8c_aba36b48ffa4844642467aa910de5ab48}} 
+\index{functions.c@{functions.c}!CreateGraph@{CreateGraph}}
+\index{CreateGraph@{CreateGraph}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{CreateGraph()}{CreateGraph()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_graph}{Graph}}$\ast$ Create\+Graph (\begin{DoxyParamCaption}\item[{int}]{V }\end{DoxyParamCaption})}
+
+A utility function that creates a graph of V vertices 
+\begin{DoxyParams}{Parameters}
+{\em V} & is the number of elements in graph-\/$>$array and numer of vertexes in graph \\
+\hline
+\end{DoxyParams}
+Create an array of adjacency lists. Size of array will be V
+
+Initialize each adjacency list as empty by making head as N\+U\+LL \mbox{\Hypertarget{functions_8c_a7f3aa36c21fb80494508da24d1256fe0}\label{functions_8c_a7f3aa36c21fb80494508da24d1256fe0}} 
+\index{functions.c@{functions.c}!createMinHeap@{createMinHeap}}
+\index{createMinHeap@{createMinHeap}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{createMinHeap()}{createMinHeap()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}}$\ast$ create\+Min\+Heap (\begin{DoxyParamCaption}\item[{int}]{capacity }\end{DoxyParamCaption})}
+
+A utility function to create a Min Heap 
+\begin{DoxyParams}{Parameters}
+{\em capacity} & is numer of nodes to Min\+Heap-\/$>$array and capacity for Min\+Heap-\/$>$capacity \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a207239dd43e942248b0e071a03badd7c}\label{functions_8c_a207239dd43e942248b0e071a03badd7c}} 
+\index{functions.c@{functions.c}!DecreaseKey@{DecreaseKey}}
+\index{DecreaseKey@{DecreaseKey}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{DecreaseKey()}{DecreaseKey()}}
+{\footnotesize\ttfamily void Decrease\+Key (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}} $\ast$}]{min\+Heap,  }\item[{int}]{v,  }\item[{int}]{dist }\end{DoxyParamCaption})}
+
+Function to decrease dist value of a given vertex v. This function uses pos\mbox{[}\mbox{]} of min heap to get the current index of node in min heap 
+\begin{DoxyParams}{Parameters}
+{\em min\+Heap} & is pointer to first list element (head) \\
+\hline
+{\em dist} & is distance to decrease \\
+\hline
+{\em v} & is vertex to decrese it\textquotesingle{}s dist\textquotesingle{}s value \\
+\hline
+\end{DoxyParams}
+Get the index of v in heap array
+
+Get the node and update its dist value
+
+Travel up while the complete tree is not hepified. This is a O(\+Logn) loop
+
+Swap this node with its parent
+
+move to parent index \mbox{\Hypertarget{functions_8c_a49e00c3da654ef178af2c5fe78a835f3}\label{functions_8c_a49e00c3da654ef178af2c5fe78a835f3}} 
+\index{functions.c@{functions.c}!DeleteAdjList@{DeleteAdjList}}
+\index{DeleteAdjList@{DeleteAdjList}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{DeleteAdjList()}{DeleteAdjList()}}
+{\footnotesize\ttfamily void Delete\+Adj\+List (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_adj_list}{Adj\+List}} $\ast$}]{p\+Head }\end{DoxyParamCaption})}
+
+A utility function to delete an adjacency list 
+\begin{DoxyParams}{Parameters}
+{\em p\+Head} & pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_ac3b55fdb76221489bc402d715d4c5d5a}\label{functions_8c_ac3b55fdb76221489bc402d715d4c5d5a}} 
+\index{functions.c@{functions.c}!DeleteAdjListNode@{DeleteAdjListNode}}
+\index{DeleteAdjListNode@{DeleteAdjListNode}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{DeleteAdjListNode()}{DeleteAdjListNode()}}
+{\footnotesize\ttfamily void Delete\+Adj\+List\+Node (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_adj_list_node}{Adj\+List\+Node}} $\ast$}]{p\+Head }\end{DoxyParamCaption})}
+
+A utility function to delete an adjacency list node 
+\begin{DoxyParams}{Parameters}
+{\em p\+Head} & pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_adf38b891337a3f8192259528b55f3975}\label{functions_8c_adf38b891337a3f8192259528b55f3975}} 
+\index{functions.c@{functions.c}!DeleteCity@{DeleteCity}}
+\index{DeleteCity@{DeleteCity}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{DeleteCity()}{DeleteCity()}}
+{\footnotesize\ttfamily void Delete\+City (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$}]{phead }\end{DoxyParamCaption})}
+
+A utility function to delete a list of cities (vertexes in graph) 
+\begin{DoxyParams}{Parameters}
+{\em p\+Head} & pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a022608548102a0855a6e94b14244f0b9}\label{functions_8c_a022608548102a0855a6e94b14244f0b9}} 
+\index{functions.c@{functions.c}!DeleteDistance@{DeleteDistance}}
+\index{DeleteDistance@{DeleteDistance}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{DeleteDistance()}{DeleteDistance()}}
+{\footnotesize\ttfamily void Delete\+Distance (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_edge}{Edge}} $\ast$}]{p\+Head }\end{DoxyParamCaption})}
+
+A utility function to delete a list of distances (edges in graph) 
+\begin{DoxyParams}{Parameters}
+{\em p\+Head} & pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a1000386bea28026be911951e478935bb}\label{functions_8c_a1000386bea28026be911951e478935bb}} 
+\index{functions.c@{functions.c}!DeleteGraph@{DeleteGraph}}
+\index{DeleteGraph@{DeleteGraph}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{DeleteGraph()}{DeleteGraph()}}
+{\footnotesize\ttfamily void Delete\+Graph (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_graph}{Graph}} $\ast$}]{p\+Head }\end{DoxyParamCaption})}
+
+A utility function to delete a graph 
+\begin{DoxyParams}{Parameters}
+{\em p\+Head} & pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_afa8c732781608f5d31fe043b95a81341}\label{functions_8c_afa8c732781608f5d31fe043b95a81341}} 
+\index{functions.c@{functions.c}!Dijkstra@{Dijkstra}}
+\index{Dijkstra@{Dijkstra}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{Dijkstra()}{Dijkstra()}}
+{\footnotesize\ttfamily void Dijkstra (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_graph}{Graph}} $\ast$}]{graph,  }\item[{int}]{src,  }\item[{struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$}]{list }\end{DoxyParamCaption})}
+
+The main function that calulates distances of shortest paths from src to all vertices. It is a O(\+E\+Log\+V) function. 
+\begin{DoxyParams}{Parameters}
+{\em src} & is the source city in the graph \\
+\hline
+{\em graph} & is pointer to first list element (head) \\
+\hline
+{\em list} & is pointer to first list element (head), given to write back names of cities, not just thei positions \\
+\hline
+\end{DoxyParams}
+Get the number of vertices in graph
+
+Dist values used to pick minimum weight edge in cut
+
+min\+Heap represents set E
+
+Initialize min heap with all vertices. dist value of all vertices
+
+Make dist value of src vertex as 0 so that it is extracted first
+
+Initially size of min heap is equal to V
+
+In the followin loop, min heap contains all nodes whose shortest distance is not yet finalized.
+
+Extract the vertex with minimum distance value
+
+Traverse through all adjacent vertices of u (the extracted vertex) and update their distance values
+
+If shortest distance to v is not finalized yet, and distance to v through u is less than its previously calculated distance
+
+Update distance value in min heap also
+
+print the calculated shortest distances \mbox{\Hypertarget{functions_8c_a544a83138eea678e4f8169e89adcfa9e}\label{functions_8c_a544a83138eea678e4f8169e89adcfa9e}} 
+\index{functions.c@{functions.c}!DijkstraOutput@{DijkstraOutput}}
+\index{DijkstraOutput@{DijkstraOutput}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{DijkstraOutput()}{DijkstraOutput()}}
+{\footnotesize\ttfamily void Dijkstra\+Output (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_graph}{Graph}} $\ast$}]{graph,  }\item[{int}]{src,  }\item[{F\+I\+LE $\ast$}]{fp,  }\item[{struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$}]{list }\end{DoxyParamCaption})}
+
+The main function that calulates distances of shortest paths from src to all vertices. It is a O(\+E\+Log\+V) function. (but it contains printing to output file) 
+\begin{DoxyParams}{Parameters}
+{\em src} & is the source city in the graph \\
+\hline
+{\em graph} & is pointer to first list element (head) \\
+\hline
+{\em fp} & is pointer to stream into file, that we are writing solution to \\
+\hline
+{\em list} & is pointer to first list element (head), given to write back names of cities, not just thei positions \\
+\hline
+\end{DoxyParams}
+Get the number of vertices in graph
+
+Dist values used to pick minimum weight edge in cut
+
+min\+Heap represents set E
+
+Initialize min heap with all vertices. dist value of all vertices
+
+Make dist value of src vertex as 0 so that it is extracted first
+
+Initially size of min heap is equal to V
+
+In the followin loop, min heap contains all nodes whose shortest distance is not yet finalized.
+
+Extract the vertex with minimum distance value
+
+Store the extracted vertex number
+
+Traverse through all adjacent vertices of u (the extracted vertex) and update their distance values
+
+If shortest distance to v is not finalized yet, and distance to v through u is less than its previously calculated distance
+
+Update distance value in min heap also
+
+print the calculated shortest distances into output file \mbox{\Hypertarget{functions_8c_a101f97428a1216797c3fdd5e90dc6f30}\label{functions_8c_a101f97428a1216797c3fdd5e90dc6f30}} 
+\index{functions.c@{functions.c}!ExtractMin@{ExtractMin}}
+\index{ExtractMin@{ExtractMin}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{ExtractMin()}{ExtractMin()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_min_heap_node}{Min\+Heap\+Node}}$\ast$ Extract\+Min (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}} $\ast$}]{min\+Heap }\end{DoxyParamCaption})}
+
+A standard function to extract minimum node from heap 
+\begin{DoxyParams}{Parameters}
+{\em min\+Heap} & is pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+Store the root node
+
+Replace root node with last node
+
+Update position of last node
+
+Reduce heap size and heapify root \mbox{\Hypertarget{functions_8c_a224342491d149d4b07e9538ffcde5406}\label{functions_8c_a224342491d149d4b07e9538ffcde5406}} 
+\index{functions.c@{functions.c}!FindingCityNameFromAList@{FindingCityNameFromAList}}
+\index{FindingCityNameFromAList@{FindingCityNameFromAList}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{FindingCityNameFromAList()}{FindingCityNameFromAList()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}} Finding\+City\+Name\+From\+A\+List (\begin{DoxyParamCaption}\item[{int}]{position,  }\item[{struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$}]{head }\end{DoxyParamCaption})}
+
+A utility function to return name of a city with position of it 
+\begin{DoxyParams}{Parameters}
+{\em position} & is position of a city to find it\textquotesingle{}s name \\
+\hline
+{\em head} & is pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a0d2d3ab38f8d6a097fd48707ee6bd347}\label{functions_8c_a0d2d3ab38f8d6a097fd48707ee6bd347}} 
+\index{functions.c@{functions.c}!FindingCityPositionFromAList@{FindingCityPositionFromAList}}
+\index{FindingCityPositionFromAList@{FindingCityPositionFromAList}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{FindingCityPositionFromAList()}{FindingCityPositionFromAList()}}
+{\footnotesize\ttfamily int Finding\+City\+Position\+From\+A\+List (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}}}]{city\+To\+Find,  }\item[{struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$}]{head }\end{DoxyParamCaption})}
+
+A utility function to return position of a city with given name of it 
+\begin{DoxyParams}{Parameters}
+{\em city\+To\+Find} & the name of a city to find it\textquotesingle{}s position \\
+\hline
+{\em head} & is pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a8d2e86f32ddc5ffcab6520dc632a9ec1}\label{functions_8c_a8d2e86f32ddc5ffcab6520dc632a9ec1}} 
+\index{functions.c@{functions.c}!FindingDuplicateCities@{FindingDuplicateCities}}
+\index{FindingDuplicateCities@{FindingDuplicateCities}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{FindingDuplicateCities()}{FindingDuplicateCities()}}
+{\footnotesize\ttfamily bool Finding\+Duplicate\+Cities (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}}}]{city\+One,  }\item[{struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$}]{head }\end{DoxyParamCaption})}
+
+/// A utility function to check if there is already city like this in a list 
+\begin{DoxyParams}{Parameters}
+{\em city\+One} & is giving the city to compare \\
+\hline
+{\em head} & is pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a4e8d16914498e9826c03c103493c80a1}\label{functions_8c_a4e8d16914498e9826c03c103493c80a1}} 
+\index{functions.c@{functions.c}!FindingDuplicateDistances@{FindingDuplicateDistances}}
+\index{FindingDuplicateDistances@{FindingDuplicateDistances}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{FindingDuplicateDistances()}{FindingDuplicateDistances()}}
+{\footnotesize\ttfamily bool Finding\+Duplicate\+Distances (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}}}]{city\+One,  }\item[{\mbox{\hyperlink{structures_8h_a40c368b38c251b762d65bf9a9703c4b0}{Text}}}]{city\+Two,  }\item[{struct \mbox{\hyperlink{struct_edge}{Edge}} $\ast$}]{head }\end{DoxyParamCaption})}
+
+A utility function to check if there is already distance like this in a list 
+\begin{DoxyParams}{Parameters}
+{\em city\+One} & is giving the first city to compare \\
+\hline
+{\em city\+Two} & is giving the second city to compare \\
+\hline
+{\em head} & is pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_aaa584a9825180d669ab306776b848119}\label{functions_8c_aaa584a9825180d669ab306776b848119}} 
+\index{functions.c@{functions.c}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily int Is\+Empty (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}} $\ast$}]{min\+Heap }\end{DoxyParamCaption})}
+
+A utility function to check if the given min\+Heap is empty or not 
+\begin{DoxyParams}{Parameters}
+{\em min\+Heap} & is pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a111124d087196a70ae72c56db497f9ec}\label{functions_8c_a111124d087196a70ae72c56db497f9ec}} 
+\index{functions.c@{functions.c}!IsInMinHeap@{IsInMinHeap}}
+\index{IsInMinHeap@{IsInMinHeap}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{IsInMinHeap()}{IsInMinHeap()}}
+{\footnotesize\ttfamily bool Is\+In\+Min\+Heap (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}} $\ast$}]{min\+Heap,  }\item[{int}]{v }\end{DoxyParamCaption})}
+
+A utility function to check if a given vertex \textquotesingle{}v\textquotesingle{} is in min heap or not 
+\begin{DoxyParams}{Parameters}
+{\em v} & is given vertex to check \\
+\hline
+{\em min\+Heap} & is pointer to first list element (head) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a12ecdcf50f7ad336684686268000b10c}\label{functions_8c_a12ecdcf50f7ad336684686268000b10c}} 
+\index{functions.c@{functions.c}!MinHeapify@{MinHeapify}}
+\index{MinHeapify@{MinHeapify}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{MinHeapify()}{MinHeapify()}}
+{\footnotesize\ttfamily void Min\+Heapify (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_min_heap}{Min\+Heap}} $\ast$}]{min\+Heap,  }\item[{int}]{idx }\end{DoxyParamCaption})}
+
+A standard function to heapify at given idx. This function also updates position of nodes when they are swapped. Position is needed for decrease\+Key() 
+\begin{DoxyParams}{Parameters}
+{\em min\+Heap} & is pointer to first list element (head) \\
+\hline
+{\em idx} & gives and index to heapify \\
+\hline
+\end{DoxyParams}
+The nodes to be swapped in min heap
+
+Swap positions
+
+Swap nodes \mbox{\Hypertarget{functions_8c_a48c4e1c652deaefa908db79a7f330662}\label{functions_8c_a48c4e1c652deaefa908db79a7f330662}} 
+\index{functions.c@{functions.c}!NewAdjListNode@{NewAdjListNode}}
+\index{NewAdjListNode@{NewAdjListNode}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{NewAdjListNode()}{NewAdjListNode()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_adj_list_node}{Adj\+List\+Node}}$\ast$ New\+Adj\+List\+Node (\begin{DoxyParamCaption}\item[{int}]{dest,  }\item[{int}]{weight }\end{DoxyParamCaption})}
+
+A utility function to create a new adjacency list node 
+\begin{DoxyParams}{Parameters}
+{\em dest} & is the desination vertex in graph (source city) \\
+\hline
+{\em weight} & is the weight of the edge in the graph (distance) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a8b47eadf72fa999972a3aed5ff83f4b6}\label{functions_8c_a8b47eadf72fa999972a3aed5ff83f4b6}} 
+\index{functions.c@{functions.c}!NewMinHeapNode@{NewMinHeapNode}}
+\index{NewMinHeapNode@{NewMinHeapNode}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{NewMinHeapNode()}{NewMinHeapNode()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_min_heap_node}{Min\+Heap\+Node}}$\ast$ New\+Min\+Heap\+Node (\begin{DoxyParamCaption}\item[{int}]{v,  }\item[{int}]{dist }\end{DoxyParamCaption})}
+
+A utility function to create a Min Heap Node 
+\begin{DoxyParams}{Parameters}
+{\em v} & is position of node in array \\
+\hline
+{\em dist} & is distance in current node \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a5e269742ddd6a1148ba57ef09ea2554f}\label{functions_8c_a5e269742ddd6a1148ba57ef09ea2554f}} 
+\index{functions.c@{functions.c}!PrintArr@{PrintArr}}
+\index{PrintArr@{PrintArr}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{PrintArr()}{PrintArr()}}
+{\footnotesize\ttfamily void Print\+Arr (\begin{DoxyParamCaption}\item[{int}]{dist\mbox{[}$\,$\mbox{]},  }\item[{int}]{n,  }\item[{struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$}]{list }\end{DoxyParamCaption})}
+
+A utility function used to print the solution 
+\begin{DoxyParams}{Parameters}
+{\em dist} & is an array of distances between given city and other cities \\
+\hline
+{\em n} & is the number of final distances to print \\
+\hline
+{\em list} & is pointer to first list element (head), given to write back names of cities, not just thei positions \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a9e15d2bdceb4213dd1a69eff38f1025a}\label{functions_8c_a9e15d2bdceb4213dd1a69eff38f1025a}} 
+\index{functions.c@{functions.c}!PrintArrToFile@{PrintArrToFile}}
+\index{PrintArrToFile@{PrintArrToFile}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{PrintArrToFile()}{PrintArrToFile()}}
+{\footnotesize\ttfamily void Print\+Arr\+To\+File (\begin{DoxyParamCaption}\item[{int}]{dist\mbox{[}$\,$\mbox{]},  }\item[{int}]{n,  }\item[{F\+I\+LE $\ast$}]{fp,  }\item[{struct \mbox{\hyperlink{struct_vertex}{Vertex}} $\ast$}]{list }\end{DoxyParamCaption})}
+
+A utility function used to print the solution into output file 
+\begin{DoxyParams}{Parameters}
+{\em dist} & is an array of distances between given city and other cities \\
+\hline
+{\em n} & is the number of final distances to print \\
+\hline
+{\em fp} & is pointer to stream into file, that we are writing solution to \\
+\hline
+{\em list} & is pointer to first list element (head), given to write back names of cities, not just thei positions \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{functions_8c_a1c9ab97cb966c6d64d2db4e8a60038bd}\label{functions_8c_a1c9ab97cb966c6d64d2db4e8a60038bd}} 
+\index{functions.c@{functions.c}!SwapMinHeapNode@{SwapMinHeapNode}}
+\index{SwapMinHeapNode@{SwapMinHeapNode}!functions.c@{functions.c}}
+\subsubsection{\texorpdfstring{SwapMinHeapNode()}{SwapMinHeapNode()}}
+{\footnotesize\ttfamily void Swap\+Min\+Heap\+Node (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_min_heap_node}{Min\+Heap\+Node}} $\ast$$\ast$}]{a,  }\item[{struct \mbox{\hyperlink{struct_min_heap_node}{Min\+Heap\+Node}} $\ast$$\ast$}]{b }\end{DoxyParamCaption})}
+
+A utility function to swap two nodes of min heap. Needed for min heapify 
+\begin{DoxyParams}{Parameters}
+{\em a} & is pointer to pointer to first node to swap \\
+\hline
+{\em b} & is pointer to pointer to second node to swap \\
+\hline
+\end{DoxyParams}
